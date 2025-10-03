@@ -6,7 +6,7 @@ Machine.add(me.dir() + "/Library/CHmUsiCK.ck");
 Machine.add(me.dir() + "/Library/SyncClass.ck");
 
 // Call OscRev.ck to read in the data  
-Machine.add(me.dir() + "/Library/OscRec.ck");
+Machine.add(me.dir() + "/Library/OscRecvr.ck");
 
 // Presumably can use static to share data between them not sure
 Machine.add(me.dir() + "/Library/LoopByCounter.ck");
