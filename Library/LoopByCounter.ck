@@ -6,6 +6,12 @@
 //  Modified 24/06/15.
 //  Testing ram overflow fix 1/03/2017.
 
+// Osc sender object
+OscOut oscOut;
+
+// Aim the transmitter to a destination
+oscOut.dest( "localhost", 49163);
+
 0 => int device;
 if( me.args() ) me.arg(0) => Std.atoi => device;
 
@@ -76,6 +82,16 @@ public static int phraseCounter()
     if(STATIC.BEATS % (Sync.NUMMEASURES * STATIC.MEASURE) == 0)
     {
         STATIC.PHRASES++;
+        
+        // Setup OSC message
+        oscOut.start( "/master/phrase" );
+    
+        // Add phrase the message
+        STATIC.PHRASES => oscOut.add;
+    
+        // Send OSC message
+        oscOut.send();
+
         //<<<STATIC.PHRASES, "Phrases">>>; //uncomment to see # of phrases
     }
    return STATIC.PHRASES;
