@@ -19,23 +19,20 @@ public class STATIC
     16 => static int DIVISION;
     8 => static int STEP;
 
-    
+    // Osc Receive Flag
+    static int oscMsgRecvr;
+     
     // Information transmitted over OSC
-    static int oscMasterLen;
     static int oscMaster[8];
-    static int oscKickLen;
     static int oscKickAmp;
     static int kickArray[16*4];
-    static int oscSnareLen;
     static int oscSnareAmp;
     static int oscSnare[8];
     static int oscOpenHatsLen;
     static int oscOpenHatsAmp;
     static int oscOpenHats[8];
-    static int oscClosedHatsLen;
     static int oscClosedHatsAmp;
     static int oscClosedHats[8];
-    static int oscSplashLen;
     static int oscSplashAmp;
     static int oscSplash[8];
 

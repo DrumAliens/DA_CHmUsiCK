@@ -14,6 +14,9 @@ OscMsg msg;
 // create an address in the receiver, expect an int and a float
 oin.addAddress( "/*");
 
+// Reset the Osc receive message flag
+0 => STATIC.oscMsgRecvr;
+
 // infinite event loop
 while( true )
 {
@@ -29,7 +32,7 @@ while( true )
         //      <= "arguments: " <= msg.numArgs() <= IO.newline();         
 
         if (msg.address == "/master/setup") {
-          msg.numArgs() => STATIC.oscMasterLen;
+          msg.numArgs() +=> STATIC.oscMsgRecvr;
           msg.getInt(0) => STATIC.oscMaster[0];
           msg.getInt(1) => STATIC.oscMaster[1];
           msg.getInt(2) => STATIC.oscMaster[2];
@@ -38,7 +41,7 @@ while( true )
 
         // // Decode the different messages 
         if (msg.address == "/drum/kick") {
-          msg.numArgs() => STATIC.oscKickLen;
+          msg.numArgs() +=> STATIC.oscMsgRecvr;
           msg.getInt(0) => STATIC.oscKickAmp;
           live.join(live.dec2Pos(msg.getInt(1)),
                     live.dec2Pos(msg.getInt(2)),
@@ -46,7 +49,7 @@ while( true )
                     live.dec2Pos(msg.getInt(4))) @=> STATIC.kickArray;
         }  
         if (msg.address == "/drum/snare") {
-          msg.numArgs() => STATIC.oscSnareLen;
+          msg.numArgs() +=> STATIC.oscMsgRecvr;
           msg.getInt(0) => STATIC.oscSnareAmp;
           msg.getInt(1) => STATIC.oscSnare[1];
           msg.getInt(2) => STATIC.oscSnare[2];
@@ -54,7 +57,7 @@ while( true )
           msg.getInt(4) => STATIC.oscSnare[4];
         }  
         if (msg.address == "/drum/openhats") {
-          msg.numArgs() => STATIC.oscOpenHatsLen;
+          msg.numArgs() +=> STATIC.oscMsgRecvr;
           msg.getInt(0) => STATIC.oscOpenHatsAmp;
           msg.getInt(1) => STATIC.oscOpenHats[1];
           msg.getInt(2) => STATIC.oscOpenHats[2];
@@ -62,7 +65,7 @@ while( true )
           msg.getInt(4) => STATIC.oscOpenHats[4];
         }  
         if (msg.address == "/drum/closedhats") {
-          msg.numArgs() => STATIC.oscClosedHatsLen;
+          msg.numArgs() +=> STATIC.oscMsgRecvr;
           msg.getInt(0) => STATIC.oscClosedHatsAmp;
           msg.getInt(1) => STATIC.oscClosedHats[1];
           msg.getInt(2) => STATIC.oscClosedHats[2];
@@ -70,7 +73,7 @@ while( true )
           msg.getInt(4) => STATIC.oscClosedHats[4];
         }  
         if (msg.address == "/drum/splash") {
-          msg.numArgs() => STATIC.oscSplashLen;
+          msg.numArgs() +=> STATIC.oscMsgRecvr;
           msg.getInt(0) => STATIC.oscSplashAmp;
           msg.getInt(1) => STATIC.oscSplash[1];
           msg.getInt(2) => STATIC.oscSplash[2];
