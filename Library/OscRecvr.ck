@@ -6,13 +6,13 @@
 Chmusick live;
 
 // create our OSC receiver
-OscIn oin;
+OscIn oscIn;
 // create our OSC message
 OscMsg msg;
 // use port 49162 (or whatever)
-49162 => oin.port;
+49162 => oscIn.port;
 // create an address in the receiver, expect an int and a float
-oin.addAddress( "/*");
+oscIn.addAddress( "/*");
 
 // Reset the Osc receive message flag
 0 => STATIC.oscMsgRecvr;
@@ -21,10 +21,10 @@ oin.addAddress( "/*");
 while( true )
 {
     // wait for event to arrive
-    oin => now;
+    oscIn => now;
 
     // grab the next message from the queue. 
-    while( oin.recv(msg) )
+    while( oscIn.recv(msg) )
     {
         // print stuff
         // cherr <= "received OSC message: \"" <= msg.address <= "\" "
