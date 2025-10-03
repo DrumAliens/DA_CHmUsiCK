@@ -39,46 +39,46 @@ while( true )
           msg.getInt(3) => STATIC.oscMaster[3];
         }
 
-        // // Decode the different messages 
+        // Decode the different messages 
         if (msg.address == "/drum/kick") {
           msg.numArgs() +=> STATIC.oscMsgRecvr;
           msg.getInt(0) => STATIC.oscKickAmp;
           live.join(live.dec2Pos(msg.getInt(1)),
                     live.dec2Pos(msg.getInt(2)),
                     live.dec2Pos(msg.getInt(3)),
-                    live.dec2Pos(msg.getInt(4))) @=> STATIC.kickArray;
+                    live.dec2Pos(msg.getInt(4))) @=> STATIC.oscKickArray;
         }  
         if (msg.address == "/drum/snare") {
           msg.numArgs() +=> STATIC.oscMsgRecvr;
           msg.getInt(0) => STATIC.oscSnareAmp;
-          msg.getInt(1) => STATIC.oscSnare[1];
-          msg.getInt(2) => STATIC.oscSnare[2];
-          msg.getInt(3) => STATIC.oscSnare[3];
-          msg.getInt(4) => STATIC.oscSnare[4];
+          live.join(live.dec2Pos(msg.getInt(1)),
+                    live.dec2Pos(msg.getInt(2)),
+                    live.dec2Pos(msg.getInt(3)),
+                    live.dec2Pos(msg.getInt(4))) @=> STATIC.oscSnareArray;   
         }  
         if (msg.address == "/drum/openhats") {
           msg.numArgs() +=> STATIC.oscMsgRecvr;
           msg.getInt(0) => STATIC.oscOpenHatsAmp;
-          msg.getInt(1) => STATIC.oscOpenHats[1];
-          msg.getInt(2) => STATIC.oscOpenHats[2];
-          msg.getInt(3) => STATIC.oscOpenHats[3];
-          msg.getInt(4) => STATIC.oscOpenHats[4];
+          live.join(live.dec2Pos(msg.getInt(1)),
+                    live.dec2Pos(msg.getInt(2)),
+                    live.dec2Pos(msg.getInt(3)),
+                    live.dec2Pos(msg.getInt(4))) @=> STATIC.oscOpenHatsArray;
         }  
         if (msg.address == "/drum/closedhats") {
           msg.numArgs() +=> STATIC.oscMsgRecvr;
           msg.getInt(0) => STATIC.oscClosedHatsAmp;
-          msg.getInt(1) => STATIC.oscClosedHats[1];
-          msg.getInt(2) => STATIC.oscClosedHats[2];
-          msg.getInt(3) => STATIC.oscClosedHats[3];
-          msg.getInt(4) => STATIC.oscClosedHats[4];
+          live.join(live.dec2Pos(msg.getInt(1)),
+                    live.dec2Pos(msg.getInt(2)),
+                    live.dec2Pos(msg.getInt(3)),
+                    live.dec2Pos(msg.getInt(4))) @=> STATIC.oscClosedHatsArray;
         }  
         if (msg.address == "/drum/splash") {
           msg.numArgs() +=> STATIC.oscMsgRecvr;
           msg.getInt(0) => STATIC.oscSplashAmp;
-          msg.getInt(1) => STATIC.oscSplash[1];
-          msg.getInt(2) => STATIC.oscSplash[2];
-          msg.getInt(3) => STATIC.oscSplash[3];
-          msg.getInt(4) => STATIC.oscSplash[4];
+          live.join(live.dec2Pos(msg.getInt(1)),
+                    live.dec2Pos(msg.getInt(2)),
+                    live.dec2Pos(msg.getInt(3)),
+                    live.dec2Pos(msg.getInt(4))) @=> STATIC.oscSplashArray;
         }  
     }     
 }
