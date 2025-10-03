@@ -25,15 +25,14 @@ public class STATIC
     // Information transmitted over OSC
     static int oscMaster[8];
     static int oscKickAmp;
-    static int kickArray[16*4];
+    static int oscKickArray[DIVISION*CYCLES];
     static int oscSnareAmp;
-    static int oscSnare[8];
-    static int oscOpenHatsLen;
+    static int oscSnareArray[DIVISION*CYCLES];
     static int oscOpenHatsAmp;
-    static int oscOpenHats[8];
+    static int oscOpenHatsArray[DIVISION*CYCLES];
     static int oscClosedHatsAmp;
-    static int oscClosedHats[8];
+    static int oscClosedHatsArray[DIVISION*CYCLES];
     static int oscSplashAmp;
-    static int oscSplash[8];
+    static int oscSplashArray[DIVISION*CYCLES];
 
 }

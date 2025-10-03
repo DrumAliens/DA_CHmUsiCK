@@ -41,31 +41,11 @@ for (0 => int i; i < 10; i++) {
 1 => float snareGain;
 1 => float kickGain;
 
-live.join(live.dec2Pos(STATIC.oscSnare[1]),
-          live.dec2Pos(STATIC.oscSnare[2]),
-          live.dec2Pos(STATIC.oscSnare[3]),
-          live.dec2Pos(STATIC.oscSnare[4])) @=> int snareArray[];
-
-live.join(live.dec2Pos(STATIC.oscOpenHats[1]),
-          live.dec2Pos(STATIC.oscOpenHats[2]), 
-          live.dec2Pos(STATIC.oscOpenHats[3]),
-          live.dec2Pos(STATIC.oscOpenHats[4])) @=> int openHatsArray[];
-
-live.join(live.dec2Pos(STATIC.oscSplash[1]),
-          live.dec2Pos(STATIC.oscSplash[2]),
-          live.dec2Pos(STATIC.oscSplash[3]),
-          live.dec2Pos(STATIC.oscSplash[4])) @=> int splashArray[];
-
-live.join(live.dec2Pos(STATIC.oscClosedHats[1]),
-          live.dec2Pos(STATIC.oscClosedHats[2]),
-          live.dec2Pos(STATIC.oscClosedHats[3]),
-          live.dec2Pos(STATIC.oscClosedHats[4])) @=> int closedHatsArray[];
-
-spork~live.play(Buffer.kick, STATIC.kickArray, STATIC.oscKickAmp*kickGain/100.0);
-spork~live.play(Buffer.snare, snareArray, STATIC.oscSnareAmp*snareGain/100.0);
-spork~live.play(Buffer.hatsOpen, openHatsArray, STATIC.oscOpenHatsAmp*hatsGain/100.0, hatsRatio);
-spork~live.play(Buffer.hatsSplash, splashArray, STATIC.oscSplashAmp*hatsGain/100.0, hatsRatio);
-spork~live.play(Buffer.hatsGhost1, closedHatsArray, STATIC.oscClosedHatsAmp*hatsGain/100.0, hatsRatio);
+spork~live.play(Buffer.kick, STATIC.oscKickArray, STATIC.oscKickAmp*kickGain/100.0);
+spork~live.play(Buffer.snare, STATIC.oscSnareArray, STATIC.oscSnareAmp*snareGain/100.0);
+spork~live.play(Buffer.hatsOpen, STATIC.oscOpenHatsArray, STATIC.oscOpenHatsAmp*hatsGain/100.0, hatsRatio);
+spork~live.play(Buffer.hatsSplash, STATIC.oscSplashArray, STATIC.oscSplashAmp*hatsGain/100.0, hatsRatio);
+spork~live.play(Buffer.hatsGhost1, STATIC.oscClosedHatsArray, STATIC.oscClosedHatsAmp*hatsGain/100.0, hatsRatio);
 // spork~live.play(Buffer.hatsGhost2,live.fill([2,6,10,14],divOneBar),STATIC.oscClosedHats[1]*hatsGain/100.0,hatsRatio);
 // spork~live.play(Buffer.hatsGhost3,live.join([3,7,11,15],[3,7,11],divOneBar),STATIC.oscClosedHats[1]*hatsGain/100.0,hatsRatio);
 
