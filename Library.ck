@@ -1,4 +1,3 @@
-
 Machine.add(me.dir() + "/Library/STATIC.ck");
 Machine.add(me.dir() + "/Library/Buffer.ck");
 Machine.add(me.dir() + "/Library/NotesClass.ck");  /// Currently used in CHmUsiK

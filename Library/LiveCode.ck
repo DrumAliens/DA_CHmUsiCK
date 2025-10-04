@@ -34,53 +34,22 @@ for (0 => int i; i < 10; i++) {
 //<<<STATIC.PHRASES, "Phrases">>>;
 
 // DRUMS
-
-// Tweak the frequency of the high hats
-1.135716 => float hatsRatio;
-0.7 => float hatsGain;
-1 => float snareGain;
-1 => float kickGain;
-
-spork~live.play(Buffer.kick, STATIC.oscKickArray, STATIC.oscKickAmp*kickGain/100.0);
-spork~live.play(Buffer.snare, STATIC.oscSnareArray, STATIC.oscSnareAmp*snareGain/100.0);
-spork~live.play(Buffer.hatsOpen, STATIC.oscOpenHatsArray, STATIC.oscOpenHatsAmp*hatsGain/100.0, hatsRatio);
-spork~live.play(Buffer.hatsSplash, STATIC.oscSplashArray, STATIC.oscSplashAmp*hatsGain/100.0, hatsRatio);
-spork~live.play(Buffer.hatsGhost1, STATIC.oscClosedHatsArray, STATIC.oscClosedHatsAmp*hatsGain/100.0, hatsRatio);
+spork~live.play(Buffer.kick, STATIC.oscKickArray, STATIC.oscKickAmp, STATIC.oscKickFreq);
+spork~live.play(Buffer.snare, STATIC.oscSnareArray, STATIC.oscSnareAmp, STATIC.oscSnareFreq);
+spork~live.play(Buffer.hatsOpen, STATIC.oscOpenHatsArray, STATIC.oscOpenHatsAmp, STATIC.oscOpenHatsFreq);
+spork~live.play(Buffer.hatsSplash, STATIC.oscSplashArray, STATIC.oscSplashAmp, STATIC.oscSplashFreq);
+spork~live.play(Buffer.hatsGhost1, STATIC.oscClosedHatsArray, STATIC.oscClosedHatsAmp, STATIC.oscClosedHatsFreq);
 // spork~live.play(Buffer.hatsGhost2,live.fill([2,6,10,14],divOneBar),STATIC.oscClosedHats[1]*hatsGain/100.0,hatsRatio);
 // spork~live.play(Buffer.hatsGhost3,live.join([3,7,11,15],[3,7,11],divOneBar),STATIC.oscClosedHats[1]*hatsGain/100.0,hatsRatio);
 
 // VOCALS
-0.5 => float vocalGain;
-1.05 => float vocalRatio;
-
-live.copy(live.fill([0],divOneBar),4) @=> int chop1Array[]; 
-
-// live.join(live.fill([2],divOneBar),
-//           live.fill([2],divOneBar),
-//           live.fill([2],divOneBar),
-//           live.fill([2],divOneBar)) @=> int chop5Array[]; 
-live.fill([2],divOneBar) @=> int chop5Array[]; 
-
-live.join(live.fill([4,12],divOneBar),
-          live.fill([4,12],divOneBar),
-          live.fill([4,12],divOneBar),
-          live.fill([4,12],divOneBar)) @=> int chop3Array[]; 
-
-live.join(live.fill([9],divOneBar),
-          live.fill([9],divOneBar),
-          live.fill([9],divOneBar),
-          live.fill([9],divOneBar)) @=> int chop4Array[]; 
-
-live.join(live.fill([14],divOneBar),
-          live.fill([14],divOneBar),
-          live.fill([14],divOneBar),
-          live.fill([14],divOneBar)) @=> int chop7Array[]; 
-
-spork~live.play(Buffer.chop1,chop1Array,vocalGain,vocalRatio);
-spork~live.play(Buffer.chop5,chop5Array,vocalGain,vocalRatio);
-spork~live.play(Buffer.chop3,chop3Array,vocalGain*.75,vocalRatio);
-spork~live.play(Buffer.chop4,chop4Array,vocalGain,vocalRatio);
-spork~live.play(Buffer.chop7,chop7Array,vocalGain*.75,vocalRatio);
+spork~live.play(Buffer.chop1,STATIC.oscChop1Array,STATIC.oscChop1Amp,STATIC.oscChop1Freq);
+spork~live.play(Buffer.chop1,STATIC.oscChop2Array,STATIC.oscChop2Amp,STATIC.oscChop2Freq);
+spork~live.play(Buffer.chop3,STATIC.oscChop3Array,STATIC.oscChop3Amp,STATIC.oscChop3Freq);
+spork~live.play(Buffer.chop4,STATIC.oscChop4Array,STATIC.oscChop4Amp,STATIC.oscChop4Freq);
+spork~live.play(Buffer.chop5,STATIC.oscChop5Array,STATIC.oscChop5Amp,STATIC.oscChop5Freq);
+spork~live.play(Buffer.chop1,STATIC.oscChop6Array,STATIC.oscChop6Amp,STATIC.oscChop6Freq);
+spork~live.play(Buffer.chop7,STATIC.oscChop7Array,STATIC.oscChop7Amp,STATIC.oscChop7Freq);
 
 // KEYBOARD
 
