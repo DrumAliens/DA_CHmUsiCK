@@ -24,15 +24,42 @@ public class STATIC
      
     // Information transmitted over OSC
     static int oscMaster[8];
-    static int oscKickAmp;
+    static float oscKickAmp;
+    static float oscKickFreq;
     static int oscKickArray[DIVISION*CYCLES];
-    static int oscSnareAmp;
+    static float oscSnareAmp;
+    static float oscSnareFreq;
     static int oscSnareArray[DIVISION*CYCLES];
-    static int oscOpenHatsAmp;
+    static float oscOpenHatsAmp;
+    static float oscOpenHatsFreq;
     static int oscOpenHatsArray[DIVISION*CYCLES];
-    static int oscClosedHatsAmp;
+    static float oscClosedHatsAmp;
+    static float oscClosedHatsFreq;
     static int oscClosedHatsArray[DIVISION*CYCLES];
-    static int oscSplashAmp;
+    static float oscSplashAmp;
+    static float oscSplashFreq;
     static int oscSplashArray[DIVISION*CYCLES];
 
+    static float oscChop1Amp;
+    static float oscChop1Freq;
+    static int oscChop1Array[DIVISION*CYCLES];
+    static float oscChop2Amp;
+    static float oscChop2Freq;
+    static int oscChop2Array[DIVISION*CYCLES];
+    static float oscChop3Amp;
+    static float oscChop3Freq;
+    static int oscChop3Array[DIVISION*CYCLES];
+    static float oscChop4Amp;
+    static float oscChop4Freq;
+    static int oscChop4Array[DIVISION*CYCLES];
+    static float oscChop5Amp;
+    static float oscChop5Freq;
+    static int oscChop5Array[DIVISION*CYCLES];
+    static float oscChop6Amp;
+    static float oscChop6Freq;
+    static int oscChop6Array[DIVISION*CYCLES];
+    static float oscChop7Amp;
+    static float oscChop7Freq;
+    static int oscChop7Array[DIVISION*CYCLES];
+  
 }
