@@ -470,7 +470,7 @@ public class Chmusick extends Chugraph {
     {
       buffer => Envelope envelope => outlet;
 
-      while(true && (gain > 0.0))
+      while(true)
       {
         for(0 => int i; i < sample.cap(); i++)
         {
@@ -492,7 +492,7 @@ public class Chmusick extends Chugraph {
     {
       buffer => Envelope envelope => outlet;
 
-      while(true && (gain > 0.0))
+      while(true)
       {
         for(0 => int i; i < sample.cap(); i++)
         {
@@ -515,7 +515,7 @@ public class Chmusick extends Chugraph {
     public void play(Osc instr, int pattern[], float gain)
     {
         instr => outlet;
-         while(true && (gain > 0.0)){
+         while(true){
             for (0 => int i; i < pattern.cap(); i++)
             {
                if(pattern[i] != 0){

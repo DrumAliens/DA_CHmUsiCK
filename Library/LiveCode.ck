@@ -34,22 +34,22 @@ for (0 => int i; i < 10; i++) {
 //<<<STATIC.PHRASES, "Phrases">>>;
 
 // DRUMS
-spork~live.play(Buffer.kick, STATIC.oscKickArray, STATIC.oscKickAmp, STATIC.oscKickFreq);
-spork~live.play(Buffer.snare, STATIC.oscSnareArray, STATIC.oscSnareAmp, STATIC.oscSnareFreq);
-spork~live.play(Buffer.hatsOpen, STATIC.oscOpenHatsArray, STATIC.oscOpenHatsAmp, STATIC.oscOpenHatsFreq);
-spork~live.play(Buffer.hatsSplash, STATIC.oscSplashArray, STATIC.oscSplashAmp, STATIC.oscSplashFreq);
-spork~live.play(Buffer.hatsGhost1, STATIC.oscClosedHatsArray, STATIC.oscClosedHatsAmp, STATIC.oscClosedHatsFreq);
+if (STATIC.oscKickAmp > 0.0) spork~live.play(Buffer.kick, STATIC.oscKickArray, STATIC.oscKickAmp, STATIC.oscKickFreq);
+if (STATIC.oscSnareAmp > 0.0) spork~live.play(Buffer.snare, STATIC.oscSnareArray, STATIC.oscSnareAmp, STATIC.oscSnareFreq);
+if (STATIC.oscOpenHatsAmp > 0.0) spork~live.play(Buffer.hatsOpen, STATIC.oscOpenHatsArray, STATIC.oscOpenHatsAmp, STATIC.oscOpenHatsFreq);
+if (STATIC.oscSplashAmp > 0.0) spork~live.play(Buffer.hatsSplash, STATIC.oscSplashArray, STATIC.oscSplashAmp, STATIC.oscSplashFreq);
+if (STATIC.oscClosedHatsAmp > 0.0) spork~live.play(Buffer.hatsGhost1, STATIC.oscClosedHatsArray, STATIC.oscClosedHatsAmp, STATIC.oscClosedHatsFreq);
 // spork~live.play(Buffer.hatsGhost2,live.fill([2,6,10,14],divOneBar),STATIC.oscClosedHats[1]*hatsGain/100.0,hatsRatio);
 // spork~live.play(Buffer.hatsGhost3,live.join([3,7,11,15],[3,7,11],divOneBar),STATIC.oscClosedHats[1]*hatsGain/100.0,hatsRatio);
 
-// VOCALS
-spork~live.play(Buffer.chop1,STATIC.oscChop1Array,STATIC.oscChop1Amp,STATIC.oscChop1Freq);
-spork~live.play(Buffer.chop1,STATIC.oscChop2Array,STATIC.oscChop2Amp,STATIC.oscChop2Freq);
-spork~live.play(Buffer.chop3,STATIC.oscChop3Array,STATIC.oscChop3Amp,STATIC.oscChop3Freq);
-spork~live.play(Buffer.chop4,STATIC.oscChop4Array,STATIC.oscChop4Amp,STATIC.oscChop4Freq);
-spork~live.play(Buffer.chop5,STATIC.oscChop5Array,STATIC.oscChop5Amp,STATIC.oscChop5Freq);
-spork~live.play(Buffer.chop1,STATIC.oscChop6Array,STATIC.oscChop6Amp,STATIC.oscChop6Freq);
-spork~live.play(Buffer.chop7,STATIC.oscChop7Array,STATIC.oscChop7Amp,STATIC.oscChop7Freq);
+// VOCAL
+if (STATIC.oscChop1Amp > 0.0) spork~live.play(Buffer.chop1,STATIC.oscChop1Array,STATIC.oscChop1Amp,STATIC.oscChop1Freq);
+if (STATIC.oscChop2Amp > 0.0) spork~live.play(Buffer.chop1,STATIC.oscChop2Array,STATIC.oscChop2Amp,STATIC.oscChop2Freq);
+if (STATIC.oscChop3Amp > 0.0) spork~live.play(Buffer.chop3,STATIC.oscChop3Array,STATIC.oscChop3Amp,STATIC.oscChop3Freq);
+if (STATIC.oscChop4Amp > 0.0) spork~live.play(Buffer.chop4,STATIC.oscChop4Array,STATIC.oscChop4Amp,STATIC.oscChop4Freq);
+if (STATIC.oscChop5Amp > 0.0) spork~live.play(Buffer.chop5,STATIC.oscChop5Array,STATIC.oscChop5Amp,STATIC.oscChop5Freq);
+if (STATIC.oscChop6Amp > 0.0) spork~live.play(Buffer.chop1,STATIC.oscChop6Array,STATIC.oscChop6Amp,STATIC.oscChop6Freq);
+if (STATIC.oscChop7Amp > 0.0) spork~live.play(Buffer.chop7,STATIC.oscChop7Array,STATIC.oscChop7Amp,STATIC.oscChop7Freq);
 
 // KEYBOARD
 
