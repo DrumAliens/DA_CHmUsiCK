@@ -15,6 +15,7 @@ public class Buffer extends Chugraph{
     new SndBuf @=> static SndBuf @ chop6;
     new SndBuf @=> static SndBuf @ chop7;
     new SndBuf @=> static SndBuf @ chop8;
+    new SndBuf @=> static SndBuf @ piano;
 
     file("resources","kick") => kick.read;
     file("resources","snare") => snare.read;
@@ -26,11 +27,13 @@ public class Buffer extends Chugraph{
     file("resources","chop1") => chop1.read;
     file("resources","chop2") => chop2.read;
     file("resources","chop3") => chop3.read;
-    file("resources","chop4") => chop4.read;
+    file("resources","chop4Mod") => chop4.read;
     file("resources","chop5") => chop5.read;
     file("resources","chop6") => chop6.read;
     file("resources","chop7") => chop7.read;
     file("resources","chop8") => chop8.read;
+    file("resources","334534__teddy_frost__piano-a4-sound") => piano.read;
+    
      
     fun string file(string name, string letter)
     {
