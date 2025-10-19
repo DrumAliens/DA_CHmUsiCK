@@ -15,7 +15,14 @@ OscMsg msg;
 oscIn.addAddress( "/*");
 
 // Reset the Osc receive message flag
-0 => STATIC.oscMsgRecvr;
+0 => STATIC.oscMsgDrumsRecvr;
+0 => STATIC.oscMsgSynthRecvr;
+0 => STATIC.oscMsgPianoRecvr;
+0 => STATIC.oscMsgMstrRecvr;
+0 => STATIC.oscMsgChops1Recvr;
+0 => STATIC.oscMsgChops3Recvr;
+0 => STATIC.oscMsgChops5Recvr;
+0 => STATIC.oscMsgChops7Recvr;
 
 // infinite event loop
 while( true )
@@ -33,7 +40,7 @@ while( true )
 
         // Master setup
         if (msg.address == "/master/setup") {
-          msg.numArgs() +=> STATIC.oscMsgRecvr;
+          msg.numArgs() => STATIC.oscMsgMstrRecvr;
           msg.getInt(0) => STATIC.oscMaster[0];
           msg.getInt(1) => STATIC.oscMaster[1];
           msg.getInt(2) => STATIC.oscMaster[2];
@@ -41,8 +48,8 @@ while( true )
         }
 
         // Drums
-        if (msg.address == "/drum/kick") {
-          msg.numArgs() +=> STATIC.oscMsgRecvr;
+        if (msg.address == "/drums/kick") {
+          msg.numArgs() +=> STATIC.oscMsgDrumsRecvr;
           if (msg.numArgs() != 1) {
             msg.getFloat(0) => STATIC.oscKickAmp;
             msg.getFloat(1) => STATIC.oscKickFreq;
@@ -55,8 +62,8 @@ while( true )
             0.0 => STATIC.oscKickAmp;
           }
         }  
-        if (msg.address == "/drum/snare") {
-          msg.numArgs() +=> STATIC.oscMsgRecvr;
+        if (msg.address == "/drums/snare") {
+          msg.numArgs() +=> STATIC.oscMsgDrumsRecvr;
           if (msg.numArgs() != 1) {
             msg.getFloat(0) => STATIC.oscSnareAmp;
             msg.getFloat(1) => STATIC.oscSnareFreq;
@@ -69,8 +76,8 @@ while( true )
             0.0 => STATIC.oscSnareAmp;
           }
         }  
-        if (msg.address == "/drum/openhats") {
-          msg.numArgs() +=> STATIC.oscMsgRecvr;
+        if (msg.address == "/drums/openhats") {
+          msg.numArgs() +=> STATIC.oscMsgDrumsRecvr;
           if (msg.numArgs() != 1) {
             msg.getFloat(0) => STATIC.oscOpenHatsAmp;
             msg.getFloat(1) => STATIC.oscOpenHatsFreq;
@@ -83,8 +90,8 @@ while( true )
             0.0 => STATIC.oscOpenHatsAmp;
           }
         }  
-        if (msg.address == "/drum/closedhats") {
-          msg.numArgs() +=> STATIC.oscMsgRecvr;
+        if (msg.address == "/drums/closedhats") {
+          msg.numArgs() +=> STATIC.oscMsgDrumsRecvr;
           if (msg.numArgs() != 1) {
             msg.getFloat(0) => STATIC.oscClosedHatsAmp;
             msg.getFloat(1) => STATIC.oscClosedHatsFreq;
@@ -97,8 +104,8 @@ while( true )
             0.0 => STATIC.oscClosedHatsAmp;
           }
         }  
-        if (msg.address == "/drum/splash") {
-          msg.numArgs() +=> STATIC.oscMsgRecvr;
+        if (msg.address == "/drums/splash") {
+          msg.numArgs() +=> STATIC.oscMsgDrumsRecvr;
           if (msg.numArgs() != 1) {
             msg.getFloat(0) => STATIC.oscSplashAmp;
             msg.getFloat(1) => STATIC.oscSplashFreq;
@@ -112,9 +119,109 @@ while( true )
           }
         }  
 
+        // Synths
+        if (msg.address == "/synth/saw0") {
+          msg.numArgs() +=> STATIC.oscMsgSynthRecvr;
+          if (msg.numArgs() != 1) {
+            msg.getFloat(0) => STATIC.oscSaw0Amp;
+            msg.getInt(1) => int loclFreq1;
+            live.dec2Pos(msg.getInt(2)) @=> int loclArray1[];
+            msg.getInt(3) => int loclFreq2;
+            live.dec2Pos(msg.getInt(4)) @=> int loclArray2[];
+            msg.getInt(5) => int loclFreq3;
+            live.dec2Pos(msg.getInt(6)) @=> int loclArray3[];
+            msg.getInt(7) => int loclFreq4;
+            live.dec2Pos(msg.getInt(8)) @=> int loclArray4[];
+            live.join(live.freqArray(loclFreq1,loclArray1),
+                      live.freqArray(loclFreq2,loclArray2),
+                      live.freqArray(loclFreq3,loclArray3),
+                      live.freqArray(loclFreq4,loclArray4)) @=> STATIC.oscSaw0Array;
+          }            
+          else {
+            0.0 => STATIC.oscSaw0Amp;
+          }
+        }  
+        if (msg.address == "/synth/saw1") {
+          msg.numArgs() +=> STATIC.oscMsgSynthRecvr;
+          if (msg.numArgs() != 1) {
+            msg.getFloat(0) => STATIC.oscSaw1Amp;
+            msg.getInt(1) => int loclFreq1;
+            live.dec2Pos(msg.getInt(2)) @=> int loclArray1[];
+            msg.getInt(3) => int loclFreq2;
+            live.dec2Pos(msg.getInt(4)) @=> int loclArray2[];
+            msg.getInt(5) => int loclFreq3;
+            live.dec2Pos(msg.getInt(6)) @=> int loclArray3[];
+            msg.getInt(7) => int loclFreq4;
+            live.dec2Pos(msg.getInt(8)) @=> int loclArray4[];
+            live.join(live.freqArray(loclFreq1,loclArray1),
+                      live.freqArray(loclFreq2,loclArray2),
+                      live.freqArray(loclFreq3,loclArray3),
+                      live.freqArray(loclFreq4,loclArray4)) @=> STATIC.oscSaw1Array;
+          }            
+          else {
+            0.0 => STATIC.oscSaw1Amp;
+          }
+        }  
+        if (msg.address == "/synth/saw2") {
+          msg.numArgs() +=> STATIC.oscMsgSynthRecvr;
+          if (msg.numArgs() != 1) {
+            msg.getFloat(0) => STATIC.oscSaw2Amp;
+            msg.getInt(1) => int loclFreq1;
+            live.dec2Pos(msg.getInt(2)) @=> int loclArray1[];
+            msg.getInt(3) => int loclFreq2;
+            live.dec2Pos(msg.getInt(4)) @=> int loclArray2[];
+            msg.getInt(5) => int loclFreq3;
+            live.dec2Pos(msg.getInt(6)) @=> int loclArray3[];
+            msg.getInt(7) => int loclFreq4;
+            live.dec2Pos(msg.getInt(8)) @=> int loclArray4[];
+            live.join(live.freqArray(loclFreq1,loclArray1),
+                      live.freqArray(loclFreq2,loclArray2),
+                      live.freqArray(loclFreq3,loclArray3),
+                      live.freqArray(loclFreq4,loclArray4)) @=> STATIC.oscSaw2Array;
+          }
+          else {
+            0.0 => STATIC.oscSaw2Amp;
+          }
+        }  
+        if (msg.address == "/synth/saw3") {
+          msg.numArgs() +=> STATIC.oscMsgSynthRecvr;
+          if (msg.numArgs() != 1) {
+            msg.getFloat(0) => STATIC.oscSaw3Amp;
+            msg.getInt(1) => int loclFreq1;
+            live.dec2Pos(msg.getInt(2)) @=> int loclArray1[];
+            msg.getInt(3) => int loclFreq2;
+            live.dec2Pos(msg.getInt(4)) @=> int loclArray2[];
+            msg.getInt(5) => int loclFreq3;
+            live.dec2Pos(msg.getInt(6)) @=> int loclArray3[];
+            msg.getInt(7) => int loclFreq4;
+            live.dec2Pos(msg.getInt(8)) @=> int loclArray4[];
+            live.join(live.freqArray(loclFreq1,loclArray1),
+                      live.freqArray(loclFreq2,loclArray2),
+                      live.freqArray(loclFreq3,loclArray3),
+                      live.freqArray(loclFreq4,loclArray4)) @=> STATIC.oscSaw3Array;
+          }            
+          else {
+            0.0 => STATIC.oscSaw3Amp;
+          }
+        }  
+        if (msg.address == "/synth/piano") {
+           msg.numArgs() => STATIC.oscMsgPianoRecvr;
+          if (msg.numArgs() != 1) {
+            msg.getFloat(0) => STATIC.oscPianoAmp;
+            msg.getFloat(1) => STATIC.oscPianoFreq;
+            live.join(live.dec2Pos(msg.getInt(2)),
+                      live.dec2Pos(msg.getInt(3)),
+                      live.dec2Pos(msg.getInt(4)),
+                      live.dec2Pos(msg.getInt(5))) @=> STATIC.oscPianoArray;
+          }            
+          else {
+            0.0 => STATIC.oscPianoAmp;
+          }
+        }  
+
         // Vocals
         if (msg.address == "/vocals/chop1") {
-          msg.numArgs() +=> STATIC.oscMsgRecvr;
+          msg.numArgs() => STATIC.oscMsgChops1Recvr;
           if (msg.numArgs() != 1) {
             msg.getFloat(0) => STATIC.oscChop1Amp;
             msg.getFloat(1) => STATIC.oscChop1Freq;
@@ -128,7 +235,7 @@ while( true )
           }
         }  
         if (msg.address == "/vocals/chop2") {
-          msg.numArgs() +=> STATIC.oscMsgRecvr;
+          msg.numArgs() => STATIC.oscMsgChops2Recvr;
           if (msg.numArgs() != 1) {
             msg.getFloat(0) => STATIC.oscChop2Amp;
             msg.getFloat(1) => STATIC.oscChop2Freq;
@@ -142,7 +249,7 @@ while( true )
           }
         }  
         if (msg.address == "/vocals/chop3") {
-          msg.numArgs() +=> STATIC.oscMsgRecvr;
+          msg.numArgs() => STATIC.oscMsgChops3Recvr;
           if (msg.numArgs() != 1) {
             msg.getFloat(0) => STATIC.oscChop3Amp;
             msg.getFloat(1) => STATIC.oscChop3Freq;
@@ -156,7 +263,7 @@ while( true )
           }
         }  
         if (msg.address == "/vocals/chop4") {
-          msg.numArgs() +=> STATIC.oscMsgRecvr;
+          msg.numArgs() => STATIC.oscMsgChops4Recvr;
           if (msg.numArgs() != 1) {
             msg.getFloat(0) => STATIC.oscChop4Amp;
             msg.getFloat(1) => STATIC.oscChop4Freq;
@@ -170,7 +277,7 @@ while( true )
           }
         }  
         if (msg.address == "/vocals/chop5") {
-          msg.numArgs() +=> STATIC.oscMsgRecvr;
+          msg.numArgs() => STATIC.oscMsgChops5Recvr;
           if (msg.numArgs() != 1) {
             msg.getFloat(0) => STATIC.oscChop5Amp;
             msg.getFloat(1) => STATIC.oscChop5Freq;
@@ -184,7 +291,7 @@ while( true )
           }
         }  
         if (msg.address == "/vocals/chop6") {
-          msg.numArgs() +=> STATIC.oscMsgRecvr;
+          msg.numArgs() => STATIC.oscMsgChops6Recvr;
           if (msg.numArgs() != 1) {
             msg.getFloat(0) => STATIC.oscChop6Amp;
             msg.getFloat(1) => STATIC.oscChop6Freq;
@@ -198,7 +305,7 @@ while( true )
           }
         }  
         if (msg.address == "/vocals/chop7") {
-          msg.numArgs() +=> STATIC.oscMsgRecvr;
+          msg.numArgs() => STATIC.oscMsgChops7Recvr;
           if (msg.numArgs() != 1) {
             msg.getFloat(0) => STATIC.oscChop7Amp;
             msg.getFloat(1) => STATIC.oscChop7Freq;

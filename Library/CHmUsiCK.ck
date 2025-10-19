@@ -231,6 +231,18 @@ public class Chmusick extends Chugraph {
         return everyArray;
     }
 
+    public int[] freqArray(int freq, int posArray[])
+    // Takes a decimal value and returns and array of positions
+    //  - assumes the position array length is 16 
+    {
+        posArray.size() => int patLength;
+        int freqArray[patLength]; 
+        for (0 => int i; i < patLength; i++) {
+            freq*posArray[i] => freqArray[i];
+        }
+        return freqArray;
+    }
+
     public int[] fill(int list[], int patLength)
     // Takes the list of positions of pattern and fills the positions with 1's to generate a pattern
     //  - the order in pattern is not important
@@ -529,6 +541,20 @@ public class Chmusick extends Chugraph {
                }
             }
         }
+    }
+    
+    public float ramp(float value, float minValue, float maxValue, float rate)
+    {
+         
+         rate +=> value;
+         Std.clampf(value,minValue,maxValue) => value;
+         return value;
+    }
+
+    // Sinewave 
+    public float lfoSine(float minValue, float maxValue, float value)
+    {
+       return 0.5*((maxValue-minValue)*Math.sin(value*STATIC.BEATS) + maxValue + minValue);
     }
 
   // ==========================================================================

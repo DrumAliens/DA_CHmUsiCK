@@ -20,10 +20,21 @@ public class STATIC
     8 => static int STEP;
 
     // Osc Receive Flag
-    static int oscMsgRecvr;
+    static int oscMsgDrumsRecvr;
+    static int oscMsgSynthRecvr;
+    static int oscMsgPianoRecvr;
+    static int oscMsgMstrRecvr;
+    static int oscMsgChops1Recvr;
+    static int oscMsgChops2Recvr;
+    static int oscMsgChops3Recvr;
+    static int oscMsgChops4Recvr;
+    static int oscMsgChops5Recvr;
+    static int oscMsgChops6Recvr;
+    static int oscMsgChops7Recvr;
      
     // Information transmitted over OSC
     static int oscMaster[8];
+
     static float oscKickAmp;
     static float oscKickFreq;
     static int oscKickArray[DIVISION*CYCLES];
@@ -40,6 +51,22 @@ public class STATIC
     static float oscSplashFreq;
     static int oscSplashArray[DIVISION*CYCLES];
 
+    static float oscSaw0Amp;
+    static float oscSaw0Freq;
+    static int oscSaw0Array[DIVISION*CYCLES];
+    static float oscSaw1Amp;
+    static float oscSaw1Freq;
+    static int oscSaw1Array[DIVISION*CYCLES];
+    static float oscSaw2Amp;
+    static float oscSaw2Freq;
+    static int oscSaw2Array[DIVISION*CYCLES];
+    static float oscSaw3Amp;
+    static float oscSaw3Freq;
+    static int oscSaw3Array[DIVISION*CYCLES];
+    static float oscPianoAmp;
+    static float oscPianoFreq;
+    static int oscPianoArray[DIVISION*CYCLES];
+    
     static float oscChop1Amp;
     static float oscChop1Freq;
     static int oscChop1Array[DIVISION*CYCLES];
