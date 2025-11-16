@@ -7,21 +7,11 @@ Chmusick live => JCRev rev => Gain gate => dac;
 // Sort changes to song
 STATIC.oscMaster[3] => STATIC.TEMPO;
 
-// 16 => int divOneBar;
-// divOneBar+divOneBar => int divTwoBar;
-// divTwoBar+divOneBar => int divThreeBar;
-// divTwoBar+divTwoBar => int divFourBar;
-
-
 0.02 => rev.mix;
 
-//<<<STATIC.BEATS, "Beats">>>;
-//<<<STATIC.MEASURES, "Measures">>>;
-//<<<STATIC.PHRASES, "Phrases">>>;
 
 // KEYBOARD
-
-spork~live.play(Buffer.piano, STATIC.oscPianoArray, STATIC.oscPianoAmp, STATIC.oscPianoFreq);
+spork~live.play(Buffer.piano, STATIC.oscPianoArray, STATIC.oscPianoAmp, STATIC.oscPianoFreq, STATIC.oscPianoMark);
 
 while(true){
     //<<< STATIC.BEATS >>>;

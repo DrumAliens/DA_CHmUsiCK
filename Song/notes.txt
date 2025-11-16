@@ -1,0 +1,30 @@
+
+## Intro
+./13_Cymbals.py r4 & ./11_Kick.py d2 r2 & ./12_Snare.py d3 r1 & ./23_Chop.py d4
+
+./21_Chop.py m10 & ./25_Chop.py m10
+
+./24_Chop.py m12 & ./27_Chop.py m8
+
+
+./12_Snare.py
+./13_Cymbals.py m5
+./11_Kick.py m10
+
+
+# Verse
+./31_SynthVerse.py t5
+./31_SynthVerse.py p2 t15
+
+
+# Chorus
+./33_SynthChorus.py t15 r1 & ./33_SynthChorus.py p2 t15 d1 r1 & ./31_SynthVerse.py d3 t5
+
+
+# Last Chorus 
+./33_SynthChorus.py t15 r1 & ./33_SynthChorus.py p2 t15 d1 r1 & ./33_SynthChorus.py d2 t15 r1 & ./33_SynthChorus.py p2 t15 d3 r1 & ./33_SynthChorus.py t15 r1 d4 & ./33_SynthChorus.py p2 t15 d5 r1 & ./33_SynthChorus.py t15 r1 d6 & ./33_SynthChorus.py p2 t15 d7
+
+
+# Start drums
+./11_Kick.py & ./12_Snare.py & ./13_Cymbals.py 
+

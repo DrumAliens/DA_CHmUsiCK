@@ -1,22 +1,34 @@
 # DA_CHmUsiCK
 Modifications to the CHmUsiCK live coding environment
 
-
-This project makes use of ChucK
-
-https://github.com/ccrma/chuck
-
-
-## Initial code base
+# Inspiration for this code
 
 The ChucK framework makes use of the following code
 
 https://github.com/celestebetancur/CHmUsiCK
 
-This then has made use of  
+This then has made use of the samples and original musical idea from here
 
 https://github.com/dbrown2642/ChucK-live-code-performance
 
+## Objective
+In CHmUsiCK a single livecode.ck file is reloaded (re-sporked in ChucK terminology) after a predefined number of bars. The song has to be develoed in the file and saved for that new set of instructions to be turned into music.
+
+In this version instruments have been split out into individual chuck files this allows the following advantages
+- samples that blend across bars can play properly (ends not overwritten)
+- instrument changes are only reloaded when a change is triggered
+
+What each instrument plays is controlled by sending out OSC messages to the ChucK code which then decodes this into musical instructions. The code also sends out OSC synch messages this allows a "player piano" mode to be used. Which allows the sent OSC messages to be scheduled to allow a song without having to do it live. This allows you to develop ideas and the song, see the program oscPlayer.py as an example.
+
+Importantly, as in CHmuSK any changes made to the song have to be sent saved at any point during the current phrase so that the changes can be instigated at the start of the new phrase. Synching of the music is handled by ChucK.
+
+Note: this approach doesn't give you as much control as you can get with the CHmUsiCK a more traditional livecoding approach. With the elements of the song/code having to be generated before a performance.
+
+<h2 align="center"> You are more conducting than livecoding </h2>
+
+# Linux Setup
+
+The code has been developed on Ubuntu
 
 ## Modify Ubuntu 
 
@@ -52,40 +64,112 @@ Finally, run the following command, which will optimally configure your system f
 ```
 Your system will likely require a restart at this point, but once the new configuration is active, you're good to go.
 
-## Python setup
+# Chuck Setup
+
+This project makes use of ChucK livecoding environment. Get the latest version of the software from here
+```
+https://chuck.stanford.edu/release/
+```
+
+get the build instructions from here
+
+```
+https://github.com/ccrma/chuck#readme
+```
+
+To make ChucK available across the computer put the following in the .bashrc file. You need to define the path that points to the binary that you have generated as part of the build process
+```
+export PATH=$PATH:/XXX/chuck-XXXX/src
+```
+
+# Python setup
 Setup virtual environment best to do it the folder using VSCode then do 
 ```bash
     $ pip install python-osc
 ```
 
-## Run Player Piano mode
-Open a terminal 
+To setup the virtual enronment in the current terminal, run
 
 ```bash
     $ source .venv/bin/activate
 ```
 
--------------
-### For command line users
-In a terminal
+## Make the python executable
 
-```bash
-    $ chuck Library.ck
-```
-
-
-### Make the python executable
-
-Since we are making use of a virtual environment we have to put the following comment on the first line of the code
+Since we are using a virtual environment we have to point to where the executable is for the python executable is in first line of the code
 ```
     #!.venv/bin/python
 ```
 Make the file executable with the following command
-'''bash
+```bash
     chmod +x myfile.py
 ```
 and execute with the following command
 ```bash
     ./myfile.py
 ```
+
+# Running the code
+
+### Running ChucK 
+In a terminal run the following
+
+```bash
+    $ chuck Library.ck
+```
+This then loads all of the different chuck elements to run the code. It will wait at this point for a OSC synch message, this contains song information such as the number of bars that make up the phrase and the tempo of the song.
+
+### Jack Control
+
+**NEED SOMETHING IN HERE**
+
+Install jack
+sudo apt install jackd2 qjackctl pipewire-jack
+
+
+in terminal type to find the list of available devices 
+```
+chuck --probe
+```
+
+should be able to do 
+```
+chuck --device:Jack Library.ck
+```
+
+# OSC Control
+
+There are 3 different modes/approaches you can use to control the cond
+
+- jupyter notebook, see oscSend.ipynb. Setup up a section for either each instrument or changes to be made at each point in the song
+- playpiano mode, see oscPlay.py. This replicates the code that is wrapped 
+- use a collection of OSC python instrument scripts, see the Song directory  
+
+# Song folder
+
+This contains a series of python scripts that can be used to replicate the song written in oscPlayer.py
+
+You can use the following command line arguements to control what is played. The following are a list of examples with default settings in brackets
+| Command | Example | Type | Description |
+| --- | --- | --- | --- |
+|**Repeat**  |r4   |integer |repeat this instrument for 4 cycles (99999999) |\
+|**Phrase**  |p2   |integer |play the second 2nd programmed pattern in the script (default 1) |\
+|**Mark**    |m10  |integer |selects bar 1 and bar 3 parts of the phrase to be played converts decimal to binary with the MSB being bar 1 (15) |\
+|**Timing**  |t10  |integer |similar to Mark allows different timings to be switched on or off each bar, usefull for synths (0) |\
+|**Delay**   |d2   |integer |delays playing this phrase for 2 cycles.The maximum delay is 10. You can't use the same delay on multple instruments (0) |\
+|**Stop**    |s2   |integer |stops playing that instrument after 2 cycles (0) |
+|**Volume**  |v0.5 |float   |allows you to change the current volume (1.0) |
+
+To make replicating this live each instrument has been grouped using a leading number
+- 00 synch messages and replays OSC to each instrument
+- 1X drums
+- 2X vocals
+- 3X synth
+- 4X piano
+- 5X dog noises 
+
+# Future Improvements
+- Automatically shut down 00_StartSong.py if it doesn't receive OSC messages
+- Master fader
+
 

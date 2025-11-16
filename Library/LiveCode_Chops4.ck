@@ -1,6 +1,5 @@
 Chmusick live => JCRev rev => Gain gate => dac;
 //Chmusick live => LPF lpf => HPF hpf => JCRev rev => Gain gate => dac;
-Notes notes;
 
 // 30000 => lpf.freq;
 // 20 => hpf.freq;
@@ -11,7 +10,7 @@ Notes notes;
 STATIC.oscMaster[3] => STATIC.TEMPO;
 
 // VOCAL
-if (STATIC.oscChop4Amp > 0.0) spork~live.play(Buffer.chop4,STATIC.oscChop4Array,STATIC.oscChop4Amp,STATIC.oscChop4Freq);
+spork~live.play(Buffer.chop4,STATIC.oscChop4Array,STATIC.oscChop4Amp,STATIC.oscChop4Freq,STATIC.oscChop4Mark);
 
 while(true){
     //<<< STATIC.BEATS >>>;

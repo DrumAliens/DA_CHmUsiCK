@@ -1,0 +1,45 @@
+#!../.venv/bin/python
+from typing import List, Any
+from pythonosc.udp_client import SimpleUDPClient
+from pythonosc.dispatcher import Dispatcher
+from pythonosc.osc_server import ThreadingOSCUDPServer
+import sys
+import Library
+
+# Read in any command line variables
+playPhrase, playVolume, numPhrase, maskArray, timeArray, delayPhrase, stopNum, freqRatio  = Library.decodeInputArg(sys.argv)
+
+ip = '127.0.0.1'
+sendPort = 49162
+recPort = 49163 + delayPhrase
+
+# Set up server and client for testing
+client = SimpleUDPClient(ip, sendPort)
+
+# if we define the number of bars we can then auto fill the OSC message to pack out the information
+# Tweak the frequency of the hit hats
+hatsRatio = 1.135716
+
+# ==== Send out 
+if (delayPhrase > 0): 
+
+    dispatcher = Dispatcher()
+    dispatcher.map("/song/master/phrase", Library.set_filter)  # Map wildcard address to set_filter function
+    server = ThreadingOSCUDPServer((ip, recPort), dispatcher)
+
+    for i in range(delayPhrase): 
+        server.handle_request()
+
+if stopNum == 0:
+    posVal = Library.pos2Dec([0,4,8,12])
+    client.send_message("/song/drums/openhats", [0.3*playVolume, hatsRatio, maskArray[3]*posVal, maskArray[2]*posVal, maskArray[1]*posVal, maskArray[0]*posVal, numPhrase])
+
+    posVal = Library.pos2Dec([1,5,9,13])
+    client.send_message("/song/drums/closedhats", [0.3*playVolume, hatsRatio, maskArray[3]*posVal, maskArray[2]*posVal, maskArray[1]*posVal, maskArray[0]*posVal, numPhrase])
+
+    posVal = Library.pos2Dec([14])
+    client.send_message("/song/drums/splash", [0.1*playVolume, hatsRatio, 0, maskArray[2]*posVal, 0, maskArray[0]*posVal, numPhrase])
+else:
+    client.send_message("/song/drums/openhats", [stopNum])
+    client.send_message("/song/drums/closedhats", [stopNum])
+    client.send_message("/song/drums/splash", [stopNum])
