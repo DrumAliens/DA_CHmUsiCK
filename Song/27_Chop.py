@@ -1,0 +1,42 @@
+#!../.venv/bin/python
+from typing import List, Any
+from pythonosc.udp_client import SimpleUDPClient
+import sys
+import Library
+from pythonosc.dispatcher import Dispatcher
+from pythonosc.osc_server import ThreadingOSCUDPServer
+
+# Read in any command line variables
+playPhrase, playVolume, numPhrase, maskArray, timeArray, delayPhrase, stopNum, freqRatio = Library.decodeInputArg(sys.argv)
+
+ip = '127.0.0.1'
+sendPort = 49162
+recPort = 49163 + delayPhrase
+
+# Set up server and client for testing
+client = SimpleUDPClient(ip, sendPort)
+
+vocalGain = 0.5*playVolume
+vocalRatio = 1.05
+
+# if we define the number of bars we can then auto fill the OSC message to pack out the information
+# Tweak the frequency of the hit hats
+hatsRatio = 1.135716
+
+# ==== Send out 
+if (delayPhrase > 0): 
+
+    dispatcher = Dispatcher()
+    dispatcher.map("/song/master/phrase", Library.set_filter)  # Map wildcard address to set_filter function
+    server = ThreadingOSCUDPServer((ip, recPort), dispatcher)
+
+    for i in range(delayPhrase): 
+        server.handle_request()
+
+posVal7 = Library.pos2Dec([14])
+if stopNum == 0 :
+    client.send_message("/song/vocals/chop7", [0.5*vocalGain, vocalRatio*freqRatio, maskArray[3]*posVal7, maskArray[2]*posVal7, maskArray[1]*posVal7, maskArray[0]*posVal7, numPhrase])
+else:
+    client.send_message("/song/vocals/chop7", [stopNum])
+
+

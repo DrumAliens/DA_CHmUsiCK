@@ -1,6 +1,5 @@
 Chmusick live => JCRev rev => Gain gate => dac;
 //Chmusick live => LPF lpf => HPF hpf => JCRev rev => Gain gate => dac;
-Notes notes;
 
 // 30000 => lpf.freq;
 // 20 => hpf.freq;
@@ -39,10 +38,10 @@ for (0 => int i; i < 10; i++) {
 // KEYBOARD
 
 0.003 => float sawGain;
-spork~live.play(saw[0],STATIC.oscSaw0Array,STATIC.oscSaw0Amp*sawGain);
-spork~live.play(saw[1],STATIC.oscSaw1Array,STATIC.oscSaw1Amp*sawGain);
-spork~live.play(saw[2],STATIC.oscSaw2Array,STATIC.oscSaw2Amp*sawGain);
-spork~live.play(saw[3],STATIC.oscSaw3Array,STATIC.oscSaw3Amp*sawGain);
+spork~live.play(saw[0],STATIC.oscSaw0Array,STATIC.oscSaw0Amp*sawGain, STATIC.oscSaw0Mark);
+spork~live.play(saw[1],STATIC.oscSaw1Array,STATIC.oscSaw1Amp*sawGain, STATIC.oscSaw1Mark);
+spork~live.play(saw[2],STATIC.oscSaw2Array,STATIC.oscSaw2Amp*sawGain, STATIC.oscSaw2Mark);
+spork~live.play(saw[3],STATIC.oscSaw3Array,STATIC.oscSaw3Amp*sawGain, STATIC.oscSaw3Mark);
 
 while(true){
     //<<< STATIC.BEATS >>>;
