@@ -8,7 +8,7 @@ Chmusick live;
 // Osc sender object
 OscOut oscOut0;
 // Aim the transmitter to a destination
-oscOut0.dest( "localhost", 49163);
+oscOut0.dest( STATIC.sendNetworkPort, 49163);
 
 99999 => int currentPhrase;
 

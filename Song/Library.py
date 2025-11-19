@@ -27,7 +27,6 @@ def set_filter(address: str, *args: List[Any]) -> None:
     if not address == "/song/master/phrase":  # Cut off the last character
         return
 
-
 def decodeInputArg(argv):
     # Read in any command line variables
     playPhrase = 1
@@ -58,3 +57,9 @@ def decodeInputArg(argv):
             freqRatio = float(string[1:])
 
     return playPhrase, playVolume, numPhrase, maskArray, timeArray, delayPhrase, stopNum, freqRatio
+
+# ======================================
+# User defined the network ip addresses
+# ======================================
+listenIp = '192.168.0.51'
+sendIp   = '192.168.0.47'
