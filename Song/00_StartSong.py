@@ -4,8 +4,10 @@ from pythonosc.dispatcher import Dispatcher
 from pythonosc.osc_server import ThreadingOSCUDPServer
 from typing import List, Any
 import time
+import Library
 
-def set_filter(address: str, *args: List[Any]) -> None:
+def set_filter(address: str, *args: List[Any]):
+
     # Check input length and type
     if not len(args) == 1 or type(args[0]) is not int:
         return
@@ -26,12 +28,20 @@ def set_filter(address: str, *args: List[Any]) -> None:
         return
 
 # Setup the OSC port and IP
-ip = '127.0.0.1'
-sendPort = 49162
-recPort = 49163
+listenIp   = Library.listenIp
+listenPort = 49163
+sendIp     = Library.sendIp 
+sendPort   = 49162
+# LEAVE THIS ONE ALONE
+replayIp   = '127.0.0.01' 
+replayPort = 49162
+
+# =================================
+# Send out the OSC port to Chuck
+# =================================
 
 # Set up server and client for testing
-client = SimpleUDPClient(ip, sendPort)
+client = SimpleUDPClient(sendIp, sendPort)
 
 # ==== Send out master message
 cycles = 4
@@ -41,23 +51,29 @@ tempo = 110
 
 client.send_message("/song/master/setup", [cycles, measure, division, tempo])
 
-# Setup a port for each instrument
-instr01 = SimpleUDPClient(ip, recPort+1)
-instr02 = SimpleUDPClient(ip, recPort+2)
-instr03 = SimpleUDPClient(ip, recPort+3)
-instr04 = SimpleUDPClient(ip, recPort+4)
-instr05 = SimpleUDPClient(ip, recPort+5)
-instr06 = SimpleUDPClient(ip, recPort+6)
-instr07 = SimpleUDPClient(ip, recPort+7)
+# =================================
+# Listen OSC port from Chuck
+# =================================
 
 # Handle the different ports for each instrument
 dispatcher = Dispatcher()
 dispatcher.map("/song/master/phrase", set_filter)  # Map wildcard address to set_filter function
 
-# Setup the server
-server = ThreadingOSCUDPServer((ip, recPort), dispatcher)
+server = ThreadingOSCUDPServer((listenIp, listenPort), dispatcher)
 
-# Infinite event loop
+# =================================
+# Rebroadcast OSC to the local instruments
+# =================================
+
+instr01 = SimpleUDPClient(replayIp, replayPort+1)
+instr02 = SimpleUDPClient(replayIp, replayPort+2)
+instr03 = SimpleUDPClient(replayIp, replayPort+3)
+instr04 = SimpleUDPClient(replayIp, replayPort+4)
+instr05 = SimpleUDPClient(replayIp, replayPort+5)
+instr06 = SimpleUDPClient(replayIp, replayPort+6)
+instr07 = SimpleUDPClient(replayIp, replayPort+7)
+
+# Listen 
 while True:
     server.handle_request()
     

@@ -19,6 +19,8 @@ public class STATIC
     16 => static int DIVISION;
     8 => static int STEP;
 
+    "127.0.0.1" @=> static string sendNetworkPort;
+
     9999999 => static int MAXINT;
 
     // Osc Receive Flag
