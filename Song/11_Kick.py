@@ -6,20 +6,15 @@ from pythonosc.osc_server import ThreadingOSCUDPServer
 import sys
 import Library
 
-def handler(address, *args):
-    print(f"Received from {address}: {args}")
-
-dispatcher = Dispatcher()
-dispatcher.map("/data", handler)
-
 # Read in any command line variables
 playPhrase, playVolume, numPhrase, maskArray, timeArray, delayPhrase, stopNum, freqRatio  = Library.decodeInputArg(sys.argv)
 
 # Setup the OSC port and IP
 sendIp = Library.sendIp
 sendPort = 49162
+# LEAVE THIS ONE ALONE
 recIp = '127.0.0.1'
-recPort = 49163 + delayPhrase
+recPort = Library.replayPort + delayPhrase
 
 # Set up server and client for testing
 client = SimpleUDPClient(sendIp, sendPort)
@@ -31,7 +26,7 @@ vocalRatio = 1.05
 if (delayPhrase > 0): 
 
     dispatcher = Dispatcher()
-    dispatcher.map("/song/master/phrase", Library.set_filter)  # Map wildcard address to set_filter function
+    dispatcher.map("/song/internal/phrase", Library.set_filter)  # Map wildcard address to set_filter function
     server = ThreadingOSCUDPServer((recIp, recPort), dispatcher)
 
     for i in range(delayPhrase): 

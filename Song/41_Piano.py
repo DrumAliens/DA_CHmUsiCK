@@ -1,10 +1,10 @@
 #!../.venv/bin/python
 from typing import List, Any
 from pythonosc.udp_client import SimpleUDPClient
-import sys
-import Library
 from pythonosc.dispatcher import Dispatcher
 from pythonosc.osc_server import ThreadingOSCUDPServer
+import sys
+import Library
 
 # Read in any command line variables
 playPhrase, playVolume, numPhrase, maskArray, timeArray, delayPhrase, stopNum, freqRatio  = Library.decodeInputArg(sys.argv)
@@ -12,8 +12,9 @@ playPhrase, playVolume, numPhrase, maskArray, timeArray, delayPhrase, stopNum, f
 # Setup the OSC port and IP
 sendIp = Library.sendIp
 sendPort = 49162
+# LEAVE THIS ONE ALONE
 recIp = '127.0.0.1'
-recPort = 49163 + delayPhrase
+recPort = Library.replayPort + delayPhrase
 
 # Set up server and client for testing
 client = SimpleUDPClient(sendIp, sendPort)
@@ -22,7 +23,7 @@ client = SimpleUDPClient(sendIp, sendPort)
 if (delayPhrase > 0): 
 
     dispatcher = Dispatcher()
-    dispatcher.map("/song/master/phrase", Library.set_filter)  # Map wildcard address to set_filter function
+    dispatcher.map("/song/internal/phrase", Library.set_filter)  # Map wildcard address to set_filter function
     server = ThreadingOSCUDPServer((recIp, recPort), dispatcher)
 
     for i in range(delayPhrase): 

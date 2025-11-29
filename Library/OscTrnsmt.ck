@@ -6,9 +6,9 @@
 Chmusick live;
 
 // Osc sender object
-OscOut oscOut0;
+OscOut oscOut;
 // Aim the transmitter to a destination
-oscOut0.dest( STATIC.sendNetworkPort, 49163);
+oscOut.dest( STATIC.sendNetworkPort, 49163);
 
 99999 => int currentPhrase;
 
@@ -22,12 +22,12 @@ while( true )
   if (currentPhrase != STATIC.PHRASES) {
 
     // Setup OSC message
-    oscOut0.start( "/song/master/phrase" );
-    STATIC.PHRASES => oscOut0.add;
-    oscOut0.send();
+    oscOut.start( "/song/master/phrase" );
+    STATIC.PHRASES => oscOut.add;
+    oscOut.send();
   
     // Update current phrase
     STATIC.PHRASES => currentPhrase;
-
+   
   }
 }

@@ -24,7 +24,7 @@ def set_filter(address: str, *args: List[Any]) -> None:
         return
 
     # Check that address 
-    if not address == "/song/master/phrase":  # Cut off the last character
+    if not address == "/song/internal/phrase":  # Cut off the last character
         return
 
 def decodeInputArg(argv):
@@ -61,5 +61,8 @@ def decodeInputArg(argv):
 # ======================================
 # User defined the network ip addresses
 # ======================================
-listenIp = '192.168.0.51'
-sendIp   = '192.168.0.47'
+listenIp = '127.0.0.1'
+listenPort = 49163
+sendIp   = '127.0.0.1'
+sendPort = 49162
+replayPort = listenPort

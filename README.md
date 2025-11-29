@@ -145,6 +145,26 @@ There are 3 different modes/approaches you can use to control the cond
 - playpiano mode, see oscPlay.py. This replicates the code that is wrapped 
 - use a collection of OSC python instrument scripts, see the Song directory  
 
+The table below shows the different OSC messages, IP and port numbers used. The three different options reflect the 3 different options for controlling the ChucK code. Note: that chuck program and the python can be run on different computers and in that case the IP's of the elements in bold would have to be changed accordingly. 
+
+
+| IP | Port | Osc Message | From | To |
+| --- | --- | --- | --- | --- |
+|**127.0.0.1** | 49162  | song/master/setup | 00_StartSong.py | OscRevr.ck |\
+| |   |  | oscPlayer.py | OscRevr.ck |\
+| |   |  | oscSend.ipynb | OscRevr.ck |\
+|**127.0.0.1** | 49163  | song/master/phrase | OscTrnsmt.ck | 00_StartSong.py |\
+| |  |  | OscTrnsmt.ck | oscPlayer.py |\
+| |  |  | OscTrnsmt.ck | oscSend.ipynb |\
+|127.0.0.1 | 49164  | song/internal/phrase | 00_StartSong.py | OscRevr.ck |\
+|127.0.0.1 | 49165  | song/internal/phrase | 00_StartSong.py | OscRevr.ck |\
+|127.0.0.1 | 49166  | song/internal/phrase | 00_StartSong.py | OscRevr.ck |\
+|127.0.0.1 | 49167  | song/internal/phrase | 00_StartSong.py | OscRevr.ck |\
+|127.0.0.1 | 49168  | song/internal/phrase | 00_StartSong.py | OscRevr.ck |\
+|127.0.0.1 | 49169  | song/internal/phrase | 00_StartSong.py | OscRevr.ck |\
+|127.0.0.1 | 49170  | song/internal/phrase | 00_StartSong.py | OscRevr.ck |\
+
+
 # Song folder
 
 This contains a series of python scripts that can be used to replicate the song written in oscPlayer.py
