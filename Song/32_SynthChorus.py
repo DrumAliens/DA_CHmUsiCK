@@ -12,8 +12,9 @@ playPhrase, playVolume, numPhrase, maskArray, timeArray, delayPhrase, stopNum, f
 # Setup the OSC port and IP
 sendIp = Library.sendIp
 sendPort = 49162
+# LEAVE THIS ONE ALONE
 recIp = '127.0.0.1'
-recPort = 49163 + delayPhrase
+recPort = Library.replayPort + delayPhrase
 
 # Set up server and client for testing
 client = SimpleUDPClient(sendIp, sendPort)
@@ -29,7 +30,7 @@ posVal4 = 65535 - timeArray[0]*Library.pos2Dec([2,5,9,10,11]);
 if (delayPhrase > 0): 
  
     dispatcher = Dispatcher()
-    dispatcher.map("/song/master/phrase", Library.set_filter)  # Map wildcard address to set_filter function
+    dispatcher.map("/song/internal/phrase", Library.set_filter)  # Map wildcard address to set_filter function
     server = ThreadingOSCUDPServer((recIp, recPort), dispatcher)
 
     for i in range(delayPhrase): 

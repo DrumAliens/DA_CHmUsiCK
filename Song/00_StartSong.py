@@ -3,10 +3,9 @@ from pythonosc.udp_client import SimpleUDPClient
 from pythonosc.dispatcher import Dispatcher
 from pythonosc.osc_server import ThreadingOSCUDPServer
 from typing import List, Any
-import time
 import Library
 
-def set_filter(address: str, *args: List[Any]):
+def set_filter(address: str, *args: List[Any]) -> None:
 
     # Check input length and type
     if not len(args) == 1 or type(args[0]) is not int:
@@ -18,23 +17,23 @@ def set_filter(address: str, *args: List[Any]):
     else:
         phraseNum = args[0]
         print(f"Phrase #{phraseNum}")
-        instr01.send_message("/song/master/phrase",[phraseNum])
-        instr02.send_message("/song/master/phrase",[phraseNum])
-        instr03.send_message("/song/master/phrase",[phraseNum])
-        instr04.send_message("/song/master/phrase",[phraseNum])
-        instr05.send_message("/song/master/phrase",[phraseNum])
-        instr06.send_message("/song/master/phrase",[phraseNum])
-        instr07.send_message("/song/master/phrase",[phraseNum])
+        instr01.send_message("/song/internal/phrase",[phraseNum])
+        instr02.send_message("/song/internal/phrase",[phraseNum])
+        instr03.send_message("/song/internal/phrase",[phraseNum])
+        instr04.send_message("/song/internal/phrase",[phraseNum])
+        instr05.send_message("/song/internal/phrase",[phraseNum])
+        instr06.send_message("/song/internal/phrase",[phraseNum])
+        instr07.send_message("/song/internal/phrase",[phraseNum])
         return
 
 # Setup the OSC port and IP
 listenIp   = Library.listenIp
-listenPort = 49163
+listenPort = Library.listenPort
 sendIp     = Library.sendIp 
-sendPort   = 49162
+sendPort   = Library.sendPort
 # LEAVE THIS ONE ALONE
 replayIp   = '127.0.0.01' 
-replayPort = 49162
+replayPort = Library.replayPort
 
 # =================================
 # Send out the OSC port to Chuck
@@ -52,17 +51,7 @@ tempo = 110
 client.send_message("/song/master/setup", [cycles, measure, division, tempo])
 
 # =================================
-# Listen OSC port from Chuck
-# =================================
-
-# Handle the different ports for each instrument
-dispatcher = Dispatcher()
-dispatcher.map("/song/master/phrase", set_filter)  # Map wildcard address to set_filter function
-
-server = ThreadingOSCUDPServer((listenIp, listenPort), dispatcher)
-
-# =================================
-# Rebroadcast OSC to the local instruments
+# Setup rebroadcast clients for OSC to the local instruments
 # =================================
 
 instr01 = SimpleUDPClient(replayIp, replayPort+1)
@@ -73,8 +62,18 @@ instr05 = SimpleUDPClient(replayIp, replayPort+5)
 instr06 = SimpleUDPClient(replayIp, replayPort+6)
 instr07 = SimpleUDPClient(replayIp, replayPort+7)
 
-# Listen 
+# =================================
+# Listen to OSC port from Chuck
+# =================================
+
+# Handle the different ports for each instrument
+dispatcher = Dispatcher()
+dispatcher.map("/song/master/phrase", set_filter)  # Map wildcard address to set_filter function
+
+server = ThreadingOSCUDPServer((listenIp, listenPort), dispatcher)
+
+# Listen for a new message
 while True:
-    server.handle_request()
+    server.serve_forever()
     
 
