@@ -7,7 +7,7 @@ import sys
 import Library
 
 # Read in any command line variables
-playPhrase, playVolume, numPhrase, maskArray, timeArray, delayPhrase, stopNum, freqRatio  = Library.decodeInputArg(sys.argv)
+playPhrase, playVolume, numPhrase, maskArray, timeArray, delayPhrase, stopNum, freqRatio  = Library.decodeInstrArg(sys.argv)
 
 sendIp = Library.sendIp
 sendPort = 49162

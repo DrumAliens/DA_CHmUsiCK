@@ -164,10 +164,30 @@ The table below shows the different OSC messages, IP and port numbers used. The 
 |127.0.0.1 | 49169  | song/internal/phrase | 00_StartSong.py | OscRevr.ck |\
 |127.0.0.1 | 49170  | song/internal/phrase | 00_StartSong.py | OscRevr.ck |\
 
-
 # Song folder
 
-This contains a series of python scripts that can be used to replicate the song written in oscPlayer.py
+This contains a series of python scripts that can be used to replicate the song written in oscPlayer.py all of the 
+
+## 00_StartSong.py
+This tran
+
+this retransmits the different ports which controls the
+
+
+
+
+## 01_F
+
+| Command | Example | Type | Description |
+| --- | --- | --- | --- |
+|**Ratet**  |r4   |float |repeat this instrument for 4 cycles (0) |\
+|**Mark**    |m10  |integer |selects bar 1 and bar 3 parts of the phrase to be played converts decimal to binary with the MSB being bar 1 (15) |\
+
+
+## Instrument files
+
+All of instruments have a leading number greater than 10
+
 
 You can use the following command line arguements to control what is played. The following are a list of examples with default settings in brackets
 | Command | Example | Type | Description |
@@ -188,8 +208,11 @@ To make replicating this live each instrument has been grouped using a leading n
 - 4X piano
 - 5X dog noises 
 
+## Library.py
+This contains a bunch of functions which are shared across the python scripts
+
+
 # Future Improvements
 - Automatically shut down 00_StartSong.py if it doesn't receive OSC messages
-- Master fader
 
 

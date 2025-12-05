@@ -27,6 +27,7 @@ oscIn.addAddress( "/song/*");
 0 => STATIC.oscMsgChops3Recvr;
 0 => STATIC.oscMsgChops5Recvr;
 0 => STATIC.oscMsgDogPackRecvr;
+0 => STATIC.oscMsgFadeRecvr;
 
 // infinite event loop
 while( true )
@@ -49,6 +50,13 @@ while( true )
       msg.getInt(1) => STATIC.oscMaster[1];
       msg.getInt(2) => STATIC.oscMaster[2];
       msg.getInt(3) => STATIC.oscMaster[3];
+    }
+
+    if (msg.address == "/song/master/fade") {
+      msg.numArgs() => STATIC.oscMsgFadeRecvr;
+      // Ensure that the input is clamped between 0.0 and 1.0
+      Std.clampf(msg.getFloat(0),-1.0,1.0) => STATIC.oscFadeRate;
+      live.dec2Pos(msg.getInt(1)) @=> STATIC.oscFadeEnbleArray;
     }
 
     // Drums

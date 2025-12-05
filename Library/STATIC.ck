@@ -19,6 +19,9 @@ public class STATIC
     16 => static int DIVISION;
     8 => static int STEP;
 
+    0.0 => static float MASTERFADERATE;
+    static int MASTERFADEARRAY[8];
+
     "127.0.0.1" @=> static string sendNetworkPort;
 
     9999999 => static int MAXINT;
@@ -40,6 +43,7 @@ public class STATIC
     static int oscMsgChops6Recvr;
     static int oscMsgChops7Recvr;
     static int oscMsgDogPackRecvr;
+    static int oscMsgFadeRecvr;
          
     // Information transmitted over OSC
     static int oscMaster[8];
@@ -48,10 +52,14 @@ public class STATIC
     static float oscKickFreq;
     MAXINT => static int oscKickMark;
     static int oscKickArray[DIVISION*CYCLES];
+    1.0 => static float oscKickGain;
+
     static float oscSnareAmp;
     static float oscSnareFreq;
     MAXINT => static int oscSnareMark;
     static int oscSnareArray[DIVISION*CYCLES];
+    1.0 => static float oscSnareGain;
+        
     static float oscOpenHatsAmp;
     static float oscOpenHatsFreq;
     MAXINT => static int oscOpenHatsMark;
@@ -64,7 +72,8 @@ public class STATIC
     static float oscSplashFreq;
     MAXINT => static int oscSplashMark;
     static int oscSplashArray[DIVISION*CYCLES];
-
+    1.0 => static float oscCymbalGain;
+   
     static float oscSaw0Amp;
     static float oscSaw0Freq;
     MAXINT => static int oscSaw0Mark;
@@ -81,10 +90,13 @@ public class STATIC
     static float oscSaw3Freq;
     MAXINT => static int oscSaw3Mark;
     static int oscSaw3Array[DIVISION*CYCLES];
+    1.0 => static float oscSawGain;
+
     static float oscPianoAmp;
     static float oscPianoFreq;
     MAXINT => static int oscPianoMark;
     static int oscPianoArray[DIVISION*CYCLES];
+    1.0 => static float oscPianoGain;
     
     static float oscChop1Amp;
     static float oscChop1Freq;
@@ -114,9 +126,22 @@ public class STATIC
     static float oscChop7Freq;
     MAXINT => static int oscChop7Mark;
     static int oscChop7Array[DIVISION*CYCLES];
+    1.0 => static float oscChop1Gain;
+    1.0 => static float oscChop2Gain;
+    1.0 => static float oscChop3Gain;
+    1.0 => static float oscChop4Gain;
+    1.0 => static float oscChop5Gain;
+    1.0 => static float oscChop6Gain;
+    1.0 => static float oscChop7Gain;
+
     static float oscDogPackAmp;
     static float oscDogPackFreq;
     MAXINT => static int oscDogPackMark;
     static int oscDogPackArray[DIVISION*CYCLES];
-  
+    1.0 => static float oscDogGain;
+
+    static float oscFadeRate;
+    static int oscFadeEnbleArray[16];
+
+
 }
