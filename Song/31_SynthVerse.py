@@ -7,7 +7,7 @@ import sys
 import Library
 
 # Read in any command line variables
-playPhrase, playVolume, numPhrase, maskArray, timeArray, delayPhrase, stopNum, freqRatio = Library.decodeInputArg(sys.argv)
+playPhrase, playVolume, numPhrase, maskArray, timeArray, delayPhrase, stopNum, freqRatio = Library.decodeInstrArg(sys.argv)
 
 # Setup the OSC port and IP
 sendIp = Library.sendIp
@@ -19,7 +19,7 @@ recPort = Library.replayPort + delayPhrase
 # Set up server and client for testing
 client = SimpleUDPClient(sendIp, sendPort)
 
-sawGain = 0.5
+sawGain = 0.2
 
 # ==== Send out 
 posVal1 = 65535 - timeArray[3]*Library.pos2Dec([2,5,9,10,11,14,15]);
@@ -39,15 +39,15 @@ if (delayPhrase > 0):
 if stopNum == 0:
     if (playPhrase == 1):
         # Same notes all way through
-        client.send_message("/song/synth/saw0", [sawGain, 40, maskArray[3]*posVal1, 40, maskArray[2]*posVal2, 40, maskArray[1]*posVal3, 40, maskArray[0]*posVal4, numPhrase])
-        client.send_message("/song/synth/saw1", [sawGain, 52, maskArray[3]*posVal1, 52, maskArray[2]*posVal2, 52, maskArray[1]*posVal3, 52, maskArray[0]*posVal4, numPhrase])
-        client.send_message("/song/synth/saw2", [sawGain, 59, maskArray[3]*posVal1, 59, maskArray[2]*posVal2, 59, maskArray[1]*posVal3, 59, maskArray[0]*posVal4, numPhrase])
-        client.send_message("/song/synth/saw3", [sawGain, 64, maskArray[3]*posVal1, 64, maskArray[2]*posVal2, 64, maskArray[1]*posVal3, 64, maskArray[0]*posVal4, numPhrase])
+        client.send_message("/song/synth/saw0", [playVolume*sawGain, 40, maskArray[3]*posVal1, 40, maskArray[2]*posVal2, 40, maskArray[1]*posVal3, 40, maskArray[0]*posVal4, numPhrase])
+        client.send_message("/song/synth/saw1", [playVolume*sawGain, 52, maskArray[3]*posVal1, 52, maskArray[2]*posVal2, 52, maskArray[1]*posVal3, 52, maskArray[0]*posVal4, numPhrase])
+        client.send_message("/song/synth/saw2", [playVolume*sawGain, 59, maskArray[3]*posVal1, 59, maskArray[2]*posVal2, 59, maskArray[1]*posVal3, 59, maskArray[0]*posVal4, numPhrase])
+        client.send_message("/song/synth/saw3", [playVolume*sawGain, 64, maskArray[3]*posVal1, 64, maskArray[2]*posVal2, 64, maskArray[1]*posVal3, 64, maskArray[0]*posVal4, numPhrase])
     else:
-        client.send_message("/song/synth/saw0", [sawGain, 40, maskArray[3]*posVal1, 40, maskArray[2]*posVal2, 40, maskArray[1]*posVal3, 40, maskArray[0]*posVal4, numPhrase])
-        client.send_message("/song/synth/saw1", [sawGain, 55, maskArray[3]*posVal1, 54, maskArray[2]*posVal2, 52, maskArray[1]*posVal3, 52, maskArray[0]*posVal4, numPhrase])
-        client.send_message("/song/synth/saw2", [sawGain, 62, maskArray[3]*posVal1, 59, maskArray[2]*posVal2, 59, maskArray[1]*posVal3, 59, maskArray[0]*posVal4, numPhrase])
-        client.send_message("/song/synth/saw3", [sawGain, 67, maskArray[3]*posVal1, 66, maskArray[2]*posVal2, 64, maskArray[1]*posVal3, 64, maskArray[0]*posVal4, numPhrase])
+        client.send_message("/song/synth/saw0", [playVolume*sawGain, 40, maskArray[3]*posVal1, 40, maskArray[2]*posVal2, 40, maskArray[1]*posVal3, 40, maskArray[0]*posVal4, numPhrase])
+        client.send_message("/song/synth/saw1", [playVolume*sawGain, 55, maskArray[3]*posVal1, 54, maskArray[2]*posVal2, 52, maskArray[1]*posVal3, 52, maskArray[0]*posVal4, numPhrase])
+        client.send_message("/song/synth/saw2", [playVolume*sawGain, 62, maskArray[3]*posVal1, 59, maskArray[2]*posVal2, 59, maskArray[1]*posVal3, 59, maskArray[0]*posVal4, numPhrase])
+        client.send_message("/song/synth/saw3", [playVolume*sawGain, 67, maskArray[3]*posVal1, 66, maskArray[2]*posVal2, 64, maskArray[1]*posVal3, 64, maskArray[0]*posVal4, numPhrase])
 else:
     client.send_message("/song/synth/saw0", [stopNum])
     client.send_message("/song/synth/saw1", [stopNum])

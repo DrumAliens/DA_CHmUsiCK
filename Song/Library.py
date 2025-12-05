@@ -1,5 +1,5 @@
 #!../.venv/bin/python
-# import sys
+#import sys
 from typing import List, Any
 
 def pos2Dec(array):
@@ -27,7 +27,7 @@ def set_filter(address: str, *args: List[Any]) -> None:
     if not address == "/song/internal/phrase":  # Cut off the last character
         return
 
-def decodeInputArg(argv):
+def decodeInstrArg(argv):
     # Read in any command line variables
     playPhrase = 1
     playVolume = 1.0
@@ -57,6 +57,19 @@ def decodeInputArg(argv):
             freqRatio = float(string[1:])
 
     return playPhrase, playVolume, numPhrase, maskArray, timeArray, delayPhrase, stopNum, freqRatio
+
+def decodeRampArg(argv):
+    # Read in any command line variables
+    rampRate = 0
+    maskDec = 0
+    for indx in range(len(argv)):
+        string = str(argv[indx])
+        if 'r' in string[0].lower():
+            rampRate = float(string[1:])
+        if 'm' in string[0].lower():
+            maskDec = int(string[1:])
+
+    return rampRate, maskDec
 
 # ======================================
 # User defined the network ip addresses

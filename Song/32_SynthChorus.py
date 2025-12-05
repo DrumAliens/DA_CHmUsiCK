@@ -7,7 +7,7 @@ import sys
 import Library
 
 # Read in any command line variables
-playPhrase, playVolume, numPhrase, maskArray, timeArray, delayPhrase, stopNum, freqRatio = Library.decodeInputArg(sys.argv)
+playPhrase, playVolume, numPhrase, maskArray, timeArray, delayPhrase, stopNum, freqRatio = Library.decodeInstrArg(sys.argv)
 
 # Setup the OSC port and IP
 sendIp = Library.sendIp
@@ -19,7 +19,7 @@ recPort = Library.replayPort + delayPhrase
 # Set up server and client for testing
 client = SimpleUDPClient(sendIp, sendPort)
 
-sawGain = 0.5
+sawGain = 0.2
 
 # ==== Send out 
 posVal1 = 65535 - timeArray[3]*Library.pos2Dec([2,5,9,10,11,14,15]);

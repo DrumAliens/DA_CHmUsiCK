@@ -1,9 +1,6 @@
 Chmusick live => JCRev rev => Gain gate => dac;
-//Chmusick live => LPF lpf => HPF hpf => JCRev rev => Gain gate => dac;
 
-// 30000 => lpf.freq;
-// 20 => hpf.freq;
-
+STATIC.oscChop7Gain => gate.gain;
 0.04 => rev.mix;
 
 // Sort changes to song
@@ -14,6 +11,11 @@ spork~live.play(Buffer.chop7,STATIC.oscChop7Array,STATIC.oscChop7Amp,STATIC.oscC
 
 while(true){
     //<<< STATIC.BEATS >>>;
+    // Master Fade
+    if (STATIC.MASTERFADEARRAY[1] == 1) {
+        live.ramp(STATIC.oscChop7Gain, 0.0, 1.0, STATIC.MASTERFADERATE) => STATIC.oscChop7Gain => gate.gain;
+    }    
+    // Wait for a beat
     live.Dur(STATIC.TEMPO,STATIC.MEASURE) => now;
 }
 

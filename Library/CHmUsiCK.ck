@@ -535,7 +535,8 @@ public class Chmusick extends Chugraph {
         while(true) {
             for (0 => int i; i < pattern.cap(); i++) {
                 if ((pattern[i] != 0) && (stop_phrases >= STATIC.PHRASES)) {
-                    instr.gain(gain);
+                    //instr.gain(gain);
+                    gain => instr.gain;
                     Std.mtof(pattern[i]) => instr.freq;
                     Dur(STATIC.TEMPO,STATIC.DIVISION) => now;
                 }
