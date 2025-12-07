@@ -4,16 +4,12 @@ from typing import List, Any
 import sys
 import Library
 
-# Setup the OSC port and IP
-sendIp     = Library.sendIp 
-sendPort   = Library.sendPort
-
 # =================================
 # Send out the OSC port to Chuck
 # =================================
 
 # Set up server and client for testing
-client = SimpleUDPClient(sendIp, sendPort)
+client = SimpleUDPClient(Library.sendIp, Library.sendPort)
 
 # ==== Send out ramp message
 rampRate, maskDec  = Library.decodeRampArg(sys.argv)

@@ -24,23 +24,15 @@ def set_filter(address: str, *args: List[Any]) -> None:
         instr05.send_message("/song/internal/phrase",[phraseNum])
         instr06.send_message("/song/internal/phrase",[phraseNum])
         instr07.send_message("/song/internal/phrase",[phraseNum])
+        instr08.send_message("/song/internal/phrase",[phraseNum])
         return
-
-# Setup the OSC port and IP
-listenIp   = Library.listenIp
-listenPort = Library.listenPort
-sendIp     = Library.sendIp 
-sendPort   = Library.sendPort
-# LEAVE THIS ONE ALONE
-replayIp   = '127.0.0.01' 
-replayPort = Library.replayPort
 
 # =================================
 # Send out the OSC port to Chuck
 # =================================
 
 # Set up server and client for testing
-client = SimpleUDPClient(sendIp, sendPort)
+client = SimpleUDPClient(Library.sendIp, Library.sendPort)
 
 # ==== Send out master message
 cycles = 4
@@ -54,13 +46,14 @@ client.send_message("/song/master/setup", [cycles, measure, division, tempo])
 # Setup rebroadcast clients for OSC to the local instruments
 # =================================
 
-instr01 = SimpleUDPClient(replayIp, replayPort+1)
-instr02 = SimpleUDPClient(replayIp, replayPort+2)
-instr03 = SimpleUDPClient(replayIp, replayPort+3)
-instr04 = SimpleUDPClient(replayIp, replayPort+4)
-instr05 = SimpleUDPClient(replayIp, replayPort+5)
-instr06 = SimpleUDPClient(replayIp, replayPort+6)
-instr07 = SimpleUDPClient(replayIp, replayPort+7)
+instr01 = SimpleUDPClient('127.0.0.01', Library.replayPort)
+instr02 = SimpleUDPClient('127.0.0.01', Library.replayPort+1)
+instr03 = SimpleUDPClient('127.0.0.01', Library.replayPort+2)
+instr04 = SimpleUDPClient('127.0.0.01', Library.replayPort+3)
+instr05 = SimpleUDPClient('127.0.0.01', Library.replayPort+4)
+instr06 = SimpleUDPClient('127.0.0.01', Library.replayPort+5)
+instr07 = SimpleUDPClient('127.0.0.01', Library.replayPort+6)
+instr08 = SimpleUDPClient('127.0.0.01', Library.replayPort+7)
 
 # =================================
 # Listen to OSC port from Chuck
@@ -70,7 +63,7 @@ instr07 = SimpleUDPClient(replayIp, replayPort+7)
 dispatcher = Dispatcher()
 dispatcher.map("/song/master/phrase", set_filter)  # Map wildcard address to set_filter function
 
-server = ThreadingOSCUDPServer((listenIp, listenPort), dispatcher)
+server = ThreadingOSCUDPServer((Library.listenIp, Library.listenPort), dispatcher)
 
 # Listen for a new message
 while True:

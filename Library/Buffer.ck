@@ -15,8 +15,8 @@ public class Buffer extends Chugraph{
     new SndBuf @=> static SndBuf @ chop6;
     new SndBuf @=> static SndBuf @ chop7;
     new SndBuf @=> static SndBuf @ chop8;
-    new SndBuf @=> static SndBuf @ piano;
-    new SndBuf @=> static SndBuf @ dogSolo;
+    new SndBuf @=> static SndBuf @ piano1;
+    new SndBuf @=> static SndBuf @ piano2;
     new SndBuf @=> static SndBuf @ dogPack;
 
     file("resources","kick") => kick.read;
@@ -35,19 +35,9 @@ public class Buffer extends Chugraph{
     file("resources","chop7") => chop7.read;
     file("resources","chop8") => chop8.read;
 
-    file("resources","11627__techsetsu__grandmithers-piano-08") => piano.read;
-    // file("resources","11628__techsetsu__grandmithers-piano-09") => piano.read;
-
-    //file("resources","11646__techsetsu__grandmithers-piano-27") => piano.read;
-    //file("resources","11632__techsetsu__grandmithers-piano-13") => piano.read;
-    //file("resources","11634__techsetsu__grandmithers-piano-15") => piano.read;
-    //file("resources","11637__techsetsu__grandmithers-piano-18") => piano.read;
-    //file("resources","334534__teddy_frost__piano-a4-sound") => piano.read;
-
-    //file("resources","254285__jagadamba__vocal-ooaahh-male-voice") => scream.read;
-    file("resources","418107__crazymonke9__single-dog-bark-1") => dogSolo.read;
-    // file("resources","343868__reitanna_hoo-hoo_MOD") => scream.read;
-
+    file("resources","382528__lomographicmusic__piano-41-e5") => piano1.read;
+    file("resources","382502__lomographicmusic__piano-14-e4") => piano2.read;
+    
     file("resources","401259__mystikuum__dogs_barking_stereo_4824") => dogPack.read;
 
      

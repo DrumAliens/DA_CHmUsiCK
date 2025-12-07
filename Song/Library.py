@@ -1,6 +1,16 @@
 #!../.venv/bin/python
-#import sys
+import socket, errno
 from typing import List, Any
+
+# ======================================
+# User defined the network ip addresses
+# ======================================
+listenIp = '127.0.0.1'
+listenPort = 49163
+sendIp   = '127.0.0.1'
+sendPort = 49162
+replayPort = listenPort + 1
+replayPortNum = 8
 
 def pos2Dec(array):
     decVal = 0
@@ -70,12 +80,3 @@ def decodeRampArg(argv):
             maskDec = int(string[1:])
 
     return rampRate, maskDec
-
-# ======================================
-# User defined the network ip addresses
-# ======================================
-listenIp = '127.0.0.1'
-listenPort = 49163
-sendIp   = '127.0.0.1'
-sendPort = 49162
-replayPort = listenPort

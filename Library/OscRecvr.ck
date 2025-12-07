@@ -23,9 +23,11 @@ oscIn.addAddress( "/song/*");
 0 => STATIC.oscMsgSynthRecvr;
 0 => STATIC.oscMsgPianoRecvr;
 0 => STATIC.oscMsgMstrRecvr;
-0 => STATIC.oscMsgChops1Recvr;
-0 => STATIC.oscMsgChops3Recvr;
-0 => STATIC.oscMsgChops5Recvr;
+0 => STATIC.oscMsgChop1Recvr;
+0 => STATIC.oscMsgChop3Recvr;
+0 => STATIC.oscMsgChop4Recvr;
+0 => STATIC.oscMsgChop5Recvr;
+0 => STATIC.oscMsgChop7Recvr;
 0 => STATIC.oscMsgDogPackRecvr;
 0 => STATIC.oscMsgFadeRecvr;
 
@@ -284,7 +286,7 @@ while( true )
 
     // Vocals
     if (msg.address == "/song/vocals/chop1") {
-      msg.numArgs() => STATIC.oscMsgChops1Recvr;
+      msg.numArgs() => STATIC.oscMsgChop1Recvr;
       if (msg.numArgs() != 1) {
         msg.getFloat(0) => STATIC.oscChop1Amp;
         msg.getFloat(1) => STATIC.oscChop1Freq;
@@ -303,7 +305,7 @@ while( true )
       }
     }  
     if (msg.address == "/song/vocals/chop2") {
-      msg.numArgs() => STATIC.oscMsgChops2Recvr;
+      msg.numArgs() => STATIC.oscMsgChop2Recvr;
       if (msg.numArgs() != 1) {
         msg.getFloat(0) => STATIC.oscChop2Amp;
         msg.getFloat(1) => STATIC.oscChop2Freq;
@@ -322,7 +324,7 @@ while( true )
       }
     }  
     if (msg.address == "/song/vocals/chop3") {
-      msg.numArgs() => STATIC.oscMsgChops3Recvr;
+      msg.numArgs() => STATIC.oscMsgChop3Recvr;
       if (msg.numArgs() != 1) {
         msg.getFloat(0) => STATIC.oscChop3Amp;
         msg.getFloat(1) => STATIC.oscChop3Freq;
@@ -341,7 +343,7 @@ while( true )
       }
     }  
     if (msg.address == "/song/vocals/chop4") {
-      msg.numArgs() => STATIC.oscMsgChops4Recvr;
+      msg.numArgs() => STATIC.oscMsgChop4Recvr;
       if (msg.numArgs() != 1) {
         msg.getFloat(0) => STATIC.oscChop4Amp;
         msg.getFloat(1) => STATIC.oscChop4Freq;
@@ -360,7 +362,7 @@ while( true )
       }
     }  
     if (msg.address == "/song/vocals/chop5") {
-      msg.numArgs() => STATIC.oscMsgChops5Recvr;
+      msg.numArgs() => STATIC.oscMsgChop5Recvr;
       if (msg.numArgs() != 1) {
         msg.getFloat(0) => STATIC.oscChop5Amp;
         msg.getFloat(1) => STATIC.oscChop5Freq;
@@ -379,7 +381,7 @@ while( true )
       }
     }  
     if (msg.address == "/song/vocals/chop6") {
-      msg.numArgs() => STATIC.oscMsgChops6Recvr;
+      msg.numArgs() => STATIC.oscMsgChop6Recvr;
       if (msg.numArgs() != 1) {
         msg.getFloat(0) => STATIC.oscChop6Amp;
         msg.getFloat(1) => STATIC.oscChop6Freq;
@@ -398,7 +400,7 @@ while( true )
       }
     }  
     if (msg.address == "/song/vocals/chop7") {
-      msg.numArgs() => STATIC.oscMsgChops7Recvr;
+      msg.numArgs() => STATIC.oscMsgChop7Recvr;
       if (msg.numArgs() != 1) {
         msg.getFloat(0) => STATIC.oscChop7Amp;
         msg.getFloat(1) => STATIC.oscChop7Freq;

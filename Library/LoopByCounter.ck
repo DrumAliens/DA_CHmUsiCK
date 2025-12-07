@@ -31,16 +31,16 @@ sync.sync(STATIC.MEASURE, Sync.NUMMEASURES);
 Machine.add(me.dir()+"/LiveCode_11_Kick.ck") => int fileKickID;
 Machine.add(me.dir()+"/LiveCode_12_Snare.ck") => int fileSnareID;
 Machine.add(me.dir()+"/LiveCode_13_Cymbals.ck") => int fileCymbalsID;
-Machine.add(me.dir()+"/LiveCode_21_Chops1.ck") => int fileChops1ID;
-Machine.add(me.dir()+"/LiveCode_23_Chops3.ck") => int fileChops3ID;
-Machine.add(me.dir()+"/LiveCode_24_Chops4.ck") => int fileChops4ID;
-Machine.add(me.dir()+"/LiveCode_25_Chops5.ck") => int fileChops5ID;
-Machine.add(me.dir()+"/LiveCode_27_Chops7.ck") => int fileChops7ID;
+Machine.add(me.dir()+"/LiveCode_21_Chop1.ck") => int fileChop1ID;
+Machine.add(me.dir()+"/LiveCode_23_Chop3.ck") => int fileChop3ID;
+Machine.add(me.dir()+"/LiveCode_24_Chop4.ck") => int fileChop4ID;
+Machine.add(me.dir()+"/LiveCode_25_Chop5.ck") => int fileChop5ID;
+Machine.add(me.dir()+"/LiveCode_27_Chop7.ck") => int fileChop7ID;
 Machine.add(me.dir()+"/LiveCode_30_Synth.ck") => int fileSynthID;
 Machine.add(me.dir()+"/LiveCode_40_Piano.ck") => int filePianoID;
 Machine.add(me.dir()+"/LiveCode_50_DogPack.ck") => int fileDogPackID;
 
-if (fileKickID*fileSnareID*fileCymbalsID*fileSynthID*filePianoID*fileChops1ID*fileChops3ID*fileChops4ID*fileChops5ID*fileChops7ID*fileDogPackID != 0) {
+if (fileKickID*fileSnareID*fileCymbalsID*fileSynthID*filePianoID*fileChop1ID*fileChop3ID*fileChop4ID*fileChop5ID*fileChop7ID*fileDogPackID != 0) {
    spork~beatCounter() @=> counterID;
    while(true) day => now;
 }
@@ -54,20 +54,20 @@ else {
    if (fileCymbalsID == 0) {
       <<< "Check your LiveCode_13_Cymbals.ck file " >>>;
    }
-   if (fileChops1ID == 0) {
-      <<< "Check your LiveCode_21_Chops1.ck file " >>>;
+   if (fileChop1ID == 0) {
+      <<< "Check your LiveCode_21_Chop1.ck file " >>>;
    }
-   if (fileChops3ID == 0) {
-      <<< "Check your LiveCode_23_Chops3.ck file " >>>;
+   if (fileChop3ID == 0) {
+      <<< "Check your LiveCode_23_Chop3.ck file " >>>;
    }
-   if (fileChops4ID == 0) {
-      <<< "Check your LiveCode_24_Chops4.ck file " >>>;
+   if (fileChop4ID == 0) {
+      <<< "Check your LiveCode_24_Chop4.ck file " >>>;
    }
-   if (fileChops5ID == 0) {
-      <<< "Check your LiveCode_25_Chops5.ck file " >>>;
+   if (fileChop5ID == 0) {
+      <<< "Check your LiveCode_25_Chop5.ck file " >>>;
    }
-   if (fileChops7ID == 0) {
-      <<< "Check your LiveCode_27_Chops7.ck file " >>>;
+   if (fileChop7ID == 0) {
+      <<< "Check your LiveCode_27_Chop7.ck file " >>>;
    }
    if (fileSynthID == 0) {
       <<< "Check your LiveCode_30_Synth.ck file " >>>;
@@ -100,30 +100,30 @@ public static int beatCounter() {
             0 => STATIC.oscMsgSplashRecvr;
          } 
 
-         if (STATIC.oscMsgChops1Recvr > 0) {
-            Machine.replace(fileChops1ID,me.dir()+"/LiveCode_21_Chops1.ck");
+         if (STATIC.oscMsgChop1Recvr > 0) {
+            Machine.replace(fileChop1ID,me.dir()+"/LiveCode_21_Chop1.ck");
             // Reset the length information
-            0 => STATIC.oscMsgChops1Recvr;
+            0 => STATIC.oscMsgChop1Recvr;
          }
-         if (STATIC.oscMsgChops3Recvr > 0) {
-            Machine.replace(fileChops3ID,me.dir()+"/LiveCode_23_Chops3.ck");
+         if (STATIC.oscMsgChop3Recvr > 0) {
+            Machine.replace(fileChop3ID,me.dir()+"/LiveCode_23_Chop3.ck");
             // Reset the length information
-            0 => STATIC.oscMsgChops3Recvr;
+            0 => STATIC.oscMsgChop3Recvr;
          }
-         if (STATIC.oscMsgChops4Recvr > 0) {
-            Machine.replace(fileChops4ID,me.dir()+"/LiveCode_24_Chops4.ck");
+         if (STATIC.oscMsgChop4Recvr > 0) {
+            Machine.replace(fileChop4ID,me.dir()+"/LiveCode_24_Chop4.ck");
             // Reset the length information
-            0 => STATIC.oscMsgChops4Recvr;
+            0 => STATIC.oscMsgChop4Recvr;
          }
-         if (STATIC.oscMsgChops5Recvr > 0) {
-            Machine.replace(fileChops5ID,me.dir()+"/LiveCode_25_Chops5.ck");
+         if (STATIC.oscMsgChop5Recvr > 0) {
+            Machine.replace(fileChop5ID,me.dir()+"/LiveCode_25_Chop5.ck");
             // Reset the length information
-            0 => STATIC.oscMsgChops5Recvr;
+            0 => STATIC.oscMsgChop5Recvr;
          }
-         if (STATIC.oscMsgChops7Recvr > 0) {
-            Machine.replace(fileChops7ID,me.dir()+"/LiveCode_27_Chops7.ck");
+         if (STATIC.oscMsgChop7Recvr > 0) {
+            Machine.replace(fileChop7ID,me.dir()+"/LiveCode_27_Chop7.ck");
             // Reset the length information
-            0 => STATIC.oscMsgChops7Recvr;
+            0 => STATIC.oscMsgChop7Recvr;
          }
 
          if (STATIC.oscMsgSynthRecvr > 0) {
