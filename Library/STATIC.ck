@@ -35,13 +35,13 @@ public class STATIC
     static int oscMsgSynthRecvr;
     static int oscMsgPianoRecvr;
     static int oscMsgMstrRecvr;
-    static int oscMsgChops1Recvr;
-    static int oscMsgChops2Recvr;
-    static int oscMsgChops3Recvr;
-    static int oscMsgChops4Recvr;
-    static int oscMsgChops5Recvr;
-    static int oscMsgChops6Recvr;
-    static int oscMsgChops7Recvr;
+    static int oscMsgChop1Recvr;
+    static int oscMsgChop2Recvr;
+    static int oscMsgChop3Recvr;
+    static int oscMsgChop4Recvr;
+    static int oscMsgChop5Recvr;
+    static int oscMsgChop6Recvr;
+    static int oscMsgChop7Recvr;
     static int oscMsgDogPackRecvr;
     static int oscMsgFadeRecvr;
          
