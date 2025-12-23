@@ -17,6 +17,7 @@ public class Buffer extends Chugraph{
     new SndBuf @=> static SndBuf @ chop8;
     new SndBuf @=> static SndBuf @ piano1;
     new SndBuf @=> static SndBuf @ piano2;
+    new SndBuf @=> static SndBuf @ bassRiff1;
     new SndBuf @=> static SndBuf @ dogPack;
 
     file("resources","kick") => kick.read;
@@ -39,6 +40,8 @@ public class Buffer extends Chugraph{
     file("resources","382502__lomographicmusic__piano-14-e4") => piano2.read;
     
     file("resources","401259__mystikuum__dogs_barking_stereo_4824") => dogPack.read;
+
+    file("resources","bassRiff1") => bassRiff1.read;
 
      
     fun string file(string name, string letter)

@@ -28,6 +28,7 @@ oscIn.addAddress( "/song/*");
 0 => STATIC.oscMsgChop4Recvr;
 0 => STATIC.oscMsgChop5Recvr;
 0 => STATIC.oscMsgChop7Recvr;
+0 => STATIC.oscMsgBassRiff1Recvr;
 0 => STATIC.oscMsgDogPackRecvr;
 0 => STATIC.oscMsgFadeRecvr;
 
@@ -417,6 +418,26 @@ while( true )
         msg.getInt(0) => STATIC.oscChop7Mark;
       }
     }  
+
+    if (msg.address == "/song/vocals/bassriff1") {
+      msg.numArgs() => STATIC.oscMsgBassRiff1Recvr;
+      if (msg.numArgs() != 1) {
+        msg.getFloat(0) => STATIC.oscBassRiff1Amp;
+        msg.getFloat(1) => STATIC.oscBassRiff1Freq;
+        live.join(live.dec2Pos(msg.getInt(2)),
+                  live.dec2Pos(msg.getInt(3)),
+                  live.dec2Pos(msg.getInt(4)),
+                  live.dec2Pos(msg.getInt(5))) @=> STATIC.oscBassRiff1Array;   
+        STATIC.MAXINT => STATIC.oscBassRiff1Mark;
+        if (msg.numArgs() > 6) {
+          msg.getInt(6) => STATIC.oscBassRiff1Mark;
+        }
+      }            
+      else {
+        msg.getInt(0) => STATIC.oscBassRiff1Mark;
+      }
+    }  
+
     if (msg.address == "/song/vocals/dogpack") {
       msg.numArgs() => STATIC.oscMsgDogPackRecvr;
       if (msg.numArgs() != 1) {
