@@ -12,7 +12,7 @@ playPhrase, playVolume, numPhrase, maskArray, timeArray, delayPhrase, stopNum, f
 # Set up server and client for testing
 client = SimpleUDPClient(Library.sendIp, Library.sendPort)
 
-vocalGain = 0.5
+vocalGain = 0.5*playVolume
 vocalRatio = 1.05
 
 # if we define the number of bars we can then auto fill the OSC message to pack out the information
@@ -32,8 +32,6 @@ if (delayPhrase > 0):
         except:
             pass
         
-    server = ThreadingOSCUDPServer((recIp, recPort), dispatcher)
-
     for i in range(delayPhrase): 
         server.handle_request()
 
