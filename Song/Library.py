@@ -10,7 +10,7 @@ listenPort = 49163
 sendIp   = '127.0.0.1'
 sendPort = 49162
 replayPort = listenPort + 1
-replayPortNum = 8
+replayPortNum = 9
 
 def pos2Dec(array):
     decVal = 0

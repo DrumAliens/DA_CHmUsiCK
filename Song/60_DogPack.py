@@ -12,36 +12,23 @@ playPhrase, playVolume, numPhrase, maskArray, timeArray, delayPhrase, stopNum, f
 # Set up server and client for testing
 client = SimpleUDPClient(Library.sendIp, Library.sendPort)
 
-# if we define the number of bars we can then auto fill the OSC message to pack out the information
-# Tweak the frequency of the hit hats
-hatsRatio = 1.135716
-
 # ==== Send out 
 if (delayPhrase > 0): 
 
     dispatcher = Dispatcher()
     dispatcher.map("/song/internal/phrase", Library.set_filter)  # Map wildcard address to set_filter function
-
+    
     # Find a free port
     for port in range(Library.replayPort, Library.replayPort + Library.replayPortNum):      
         try:
             server = ThreadingOSCUDPServer(('127.0.0.1', port), dispatcher)
         except:
             pass
-
+    
     for i in range(delayPhrase): 
         server.handle_request()
-
+    
 if stopNum == 0:
-    posVal = Library.pos2Dec([0,4,8,12])
-    client.send_message("/song/drums/openhats", [0.3*playVolume, hatsRatio, maskArray[3]*posVal, maskArray[2]*posVal, maskArray[1]*posVal, maskArray[0]*posVal, numPhrase])
-
-    posVal = Library.pos2Dec([1,5,9,13])
-    client.send_message("/song/drums/closedhats", [0.3*playVolume, hatsRatio, maskArray[3]*posVal, maskArray[2]*posVal, maskArray[1]*posVal, maskArray[0]*posVal, numPhrase])
-
-    posVal = Library.pos2Dec([14])
-    client.send_message("/song/drums/splash", [0.1*playVolume, hatsRatio, 0, maskArray[2]*posVal, 0, maskArray[0]*posVal, numPhrase])
+    client.send_message("/song/vocals/dogpack", [0.1*playVolume, freqRatio, 1, 0, 0, 0, 1])
 else:
-    client.send_message("/song/drums/openhats", [stopNum])
-    client.send_message("/song/drums/closedhats", [stopNum])
-    client.send_message("/song/drums/splash", [stopNum])
+    client.send_message("/song/vocals/dogpack", [stopNum])

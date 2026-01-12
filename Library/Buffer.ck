@@ -18,6 +18,11 @@ public class Buffer extends Chugraph{
     new SndBuf @=> static SndBuf @ piano1;
     new SndBuf @=> static SndBuf @ piano2;
     new SndBuf @=> static SndBuf @ bassRiff1;
+    new SndBuf @=> static SndBuf @ bassRiff2;
+    new SndBuf @=> static SndBuf @ bassRiff3;
+    new SndBuf @=> static SndBuf @ bassRiff4;
+    new SndBuf @=> static SndBuf @ bassRiff5;
+    new SndBuf @=> static SndBuf @ bassRiff6;
     new SndBuf @=> static SndBuf @ dogPack;
 
     file("resources","kick") => kick.read;
@@ -30,7 +35,7 @@ public class Buffer extends Chugraph{
     file("resources","chop1") => chop1.read;
     file("resources","chop2") => chop2.read;
     file("resources","chop3") => chop3.read;
-    file("resources","chop4Mod") => chop4.read;
+    file("resources","chop4") => chop4.read;
     file("resources","chop5") => chop5.read;
     file("resources","chop6") => chop6.read;
     file("resources","chop7") => chop7.read;
@@ -41,9 +46,11 @@ public class Buffer extends Chugraph{
     
     file("resources","401259__mystikuum__dogs_barking_stereo_4824") => dogPack.read;
 
-    file("resources","bassRiff1") => bassRiff1.read;
+    file("resources","bassRiffVerse1_v99") => bassRiff1.read;
+    file("resources","bassRiffVerse2_v99") => bassRiff2.read;
+    file("resources","bassRiffChorusAllHigh_v99") => bassRiff3.read;
+    file("resources","bassRiffChorus2_v99") => bassRiff4.read;
 
-     
     fun string file(string name, string letter)
     {
         me.dir() + "Samples/" + name + "/" + letter + ".wav" => string fileName; //Mac/Linux conflict with path

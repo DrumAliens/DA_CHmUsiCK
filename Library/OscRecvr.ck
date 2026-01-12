@@ -28,7 +28,7 @@ oscIn.addAddress( "/song/*");
 0 => STATIC.oscMsgChop4Recvr;
 0 => STATIC.oscMsgChop5Recvr;
 0 => STATIC.oscMsgChop7Recvr;
-0 => STATIC.oscMsgBassRiff1Recvr;
+0 => STATIC.oscMsgBassRiffRecvr;
 0 => STATIC.oscMsgDogPackRecvr;
 0 => STATIC.oscMsgFadeRecvr;
 
@@ -72,10 +72,7 @@ while( true )
                   live.dec2Pos(msg.getInt(3)),
                   live.dec2Pos(msg.getInt(4)),
                   live.dec2Pos(msg.getInt(5))) @=> STATIC.oscKickArray;
-        STATIC.MAXINT => STATIC.oscKickMark;
-        if (msg.numArgs() > 6) {
-          msg.getInt(6) => STATIC.oscKickMark;
-        }
+        msg.getInt(6) => STATIC.oscKickMark;
       }            
       else {
         //0.0 => STATIC.oscKickAmp;
@@ -91,10 +88,7 @@ while( true )
                   live.dec2Pos(msg.getInt(3)),
                   live.dec2Pos(msg.getInt(4)),
                   live.dec2Pos(msg.getInt(5))) @=> STATIC.oscSnareArray;   
-        STATIC.MAXINT => STATIC.oscSnareMark;
-        if (msg.numArgs() > 6) {
-          msg.getInt(6) => STATIC.oscSnareMark;
-        }
+        msg.getInt(6) => STATIC.oscSnareMark;
       }            
       else {
         //0.0 => STATIC.oscSnareAmp;
@@ -110,11 +104,7 @@ while( true )
                   live.dec2Pos(msg.getInt(3)),
                   live.dec2Pos(msg.getInt(4)),
                   live.dec2Pos(msg.getInt(5))) @=> STATIC.oscOpenHatsArray;
-        STATIC.MAXINT => STATIC.oscOpenHatsMark;
-        if (msg.numArgs() > 6) {
-          msg.getInt(6) => STATIC.oscOpenHatsMark;
-        }
-
+        msg.getInt(6) => STATIC.oscOpenHatsMark;
       }            
       else {
         //0.0 => STATIC.oscOpenHatsAmp;
@@ -130,10 +120,7 @@ while( true )
                   live.dec2Pos(msg.getInt(3)),
                   live.dec2Pos(msg.getInt(4)),
                   live.dec2Pos(msg.getInt(5))) @=> STATIC.oscClosedHatsArray;
-        STATIC.MAXINT => STATIC.oscClosedHatsMark;
-        if (msg.numArgs() > 6) {
-          msg.getInt(6) => STATIC.oscClosedHatsMark;
-        }
+        msg.getInt(6) => STATIC.oscClosedHatsMark;
       }            
       else {
         //0.0 => STATIC.oscClosedHatsAmp;
@@ -149,10 +136,7 @@ while( true )
                   live.dec2Pos(msg.getInt(3)),
                   live.dec2Pos(msg.getInt(4)),
                   live.dec2Pos(msg.getInt(5))) @=> STATIC.oscSplashArray;
-        STATIC.MAXINT => STATIC.oscSplashMark;
-        if (msg.numArgs() > 6) {
-          msg.getInt(6) => STATIC.oscSplashMark;
-        }
+        msg.getInt(6) => STATIC.oscSplashMark;
       }            
       else {
         //0.0 => STATIC.oscSplashAmp;
@@ -177,10 +161,7 @@ while( true )
                   live.freqArray(loclFreq2,loclArray2),
                   live.freqArray(loclFreq3,loclArray3),
                   live.freqArray(loclFreq4,loclArray4)) @=> STATIC.oscSaw0Array;
-        STATIC.MAXINT => STATIC.oscSaw0Mark;
-        if (msg.numArgs() > 9) {
-          msg.getInt(9) => STATIC.oscSaw0Mark;
-        }
+        msg.getInt(9) => STATIC.oscSaw0Mark;
       }            
       else {
         //0.0 => STATIC.oscSaw0Amp;
@@ -203,10 +184,7 @@ while( true )
                   live.freqArray(loclFreq2,loclArray2),
                   live.freqArray(loclFreq3,loclArray3),
                   live.freqArray(loclFreq4,loclArray4)) @=> STATIC.oscSaw1Array;
-        STATIC.MAXINT => STATIC.oscSaw1Mark;
-        if (msg.numArgs() > 9) {
-          msg.getInt(9) => STATIC.oscSaw1Mark;
-        }
+        msg.getInt(9) => STATIC.oscSaw1Mark;
       }            
       else {
         // 0.0 => STATIC.oscSaw1Amp;
@@ -229,10 +207,7 @@ while( true )
                   live.freqArray(loclFreq2,loclArray2),
                   live.freqArray(loclFreq3,loclArray3),
                   live.freqArray(loclFreq4,loclArray4)) @=> STATIC.oscSaw2Array;
-        STATIC.MAXINT => STATIC.oscSaw2Mark;
-        if (msg.numArgs() > 9) {
-          msg.getInt(9) => STATIC.oscSaw2Mark;
-        }
+        msg.getInt(9) => STATIC.oscSaw2Mark;
       }
       else {
         // 0.0 => STATIC.oscSaw2Amp;
@@ -255,10 +230,7 @@ while( true )
                   live.freqArray(loclFreq2,loclArray2),
                   live.freqArray(loclFreq3,loclArray3),
                   live.freqArray(loclFreq4,loclArray4)) @=> STATIC.oscSaw3Array;
-        STATIC.MAXINT => STATIC.oscSaw3Mark;
-        if (msg.numArgs() > 9) {
-          msg.getInt(9) => STATIC.oscSaw3Mark;
-        }
+        msg.getInt(9) => STATIC.oscSaw3Mark;
       }            
       else {
         // 0.0 => STATIC.oscSaw3Amp;
@@ -274,10 +246,7 @@ while( true )
                   live.dec2Pos(msg.getInt(3)),
                   live.dec2Pos(msg.getInt(4)),
                   live.dec2Pos(msg.getInt(5))) @=> STATIC.oscPianoArray;
-        STATIC.MAXINT => STATIC.oscPianoMark;
-        if (msg.numArgs() > 6) {
-          msg.getInt(6) => STATIC.oscPianoMark;
-        }
+        msg.getInt(6) => STATIC.oscPianoMark;
       }            
       else {
         // 0.0 => STATIC.oscPianoAmp;
@@ -295,10 +264,7 @@ while( true )
                   live.dec2Pos(msg.getInt(3)),
                   live.dec2Pos(msg.getInt(4)),
                   live.dec2Pos(msg.getInt(5))) @=> STATIC.oscChop1Array;
-        STATIC.MAXINT => STATIC.oscChop1Mark;
-        if (msg.numArgs() > 6) {
-          msg.getInt(6) => STATIC.oscChop1Mark;
-        }
+        msg.getInt(6) => STATIC.oscChop1Mark;
       }            
       else {
         // 0.0 => STATIC.oscChop1Amp;
@@ -314,10 +280,7 @@ while( true )
                   live.dec2Pos(msg.getInt(3)),
                   live.dec2Pos(msg.getInt(4)),
                   live.dec2Pos(msg.getInt(5))) @=> STATIC.oscChop2Array;
-        STATIC.MAXINT => STATIC.oscChop2Mark;
-        if (msg.numArgs() > 6) {
-          msg.getInt(6) => STATIC.oscChop2Mark;
-        }
+        msg.getInt(6) => STATIC.oscChop2Mark;
       }            
       else {
         // 0.0 => STATIC.oscChop2Amp;
@@ -333,10 +296,7 @@ while( true )
                   live.dec2Pos(msg.getInt(3)),
                   live.dec2Pos(msg.getInt(4)),
                   live.dec2Pos(msg.getInt(5))) @=> STATIC.oscChop3Array;
-        STATIC.MAXINT => STATIC.oscChop3Mark;
-        if (msg.numArgs() > 6) {
-          msg.getInt(6) => STATIC.oscChop3Mark;
-        }
+        msg.getInt(6) => STATIC.oscChop3Mark;
       }            
       else {
         // 0.0 => STATIC.oscChop3Amp;
@@ -352,10 +312,7 @@ while( true )
                   live.dec2Pos(msg.getInt(3)),
                   live.dec2Pos(msg.getInt(4)),
                   live.dec2Pos(msg.getInt(5))) @=> STATIC.oscChop4Array;
-        STATIC.MAXINT => STATIC.oscChop4Mark;
-        if (msg.numArgs() > 6) {
-          msg.getInt(6) => STATIC.oscChop4Mark;
-        }
+        msg.getInt(6) => STATIC.oscChop4Mark;
       }            
       else {
         // 0.0 => STATIC.oscChop4Amp;
@@ -371,10 +328,7 @@ while( true )
                   live.dec2Pos(msg.getInt(3)),
                   live.dec2Pos(msg.getInt(4)),
                   live.dec2Pos(msg.getInt(5))) @=> STATIC.oscChop5Array;
-        STATIC.MAXINT => STATIC.oscChop5Mark;
-        if (msg.numArgs() > 6) {
-          msg.getInt(6) => STATIC.oscChop5Mark;
-        }
+        msg.getInt(6) => STATIC.oscChop5Mark;
       }            
       else {
         //0.0 => STATIC.oscChop5Amp;
@@ -390,10 +344,7 @@ while( true )
                   live.dec2Pos(msg.getInt(3)),
                   live.dec2Pos(msg.getInt(4)),
                   live.dec2Pos(msg.getInt(5))) @=> STATIC.oscChop6Array;
-        STATIC.MAXINT => STATIC.oscChop6Mark;
-        if (msg.numArgs() > 6) {
-          msg.getInt(6) => STATIC.oscChop6Mark;
-        }
+        msg.getInt(6) => STATIC.oscChop6Mark;
       }            
       else {
         //0.0 => STATIC.oscChop6Amp;
@@ -409,32 +360,27 @@ while( true )
                   live.dec2Pos(msg.getInt(3)),
                   live.dec2Pos(msg.getInt(4)),
                   live.dec2Pos(msg.getInt(5))) @=> STATIC.oscChop7Array;
-        STATIC.MAXINT => STATIC.oscChop7Mark;
-        if (msg.numArgs() > 6) {
           msg.getInt(6) => STATIC.oscChop7Mark;
-        }
       }            
       else {
         msg.getInt(0) => STATIC.oscChop7Mark;
       }
     }  
 
-    if (msg.address == "/song/vocals/bassriff1") {
-      msg.numArgs() => STATIC.oscMsgBassRiff1Recvr;
+    if (msg.address == "/song/vocals/bassriff") {
+      msg.numArgs() => STATIC.oscMsgBassRiffRecvr;
       if (msg.numArgs() != 1) {
-        msg.getFloat(0) => STATIC.oscBassRiff1Amp;
-        msg.getFloat(1) => STATIC.oscBassRiff1Freq;
-        live.join(live.dec2Pos(msg.getInt(2)),
-                  live.dec2Pos(msg.getInt(3)),
+        msg.getFloat(0) => STATIC.oscBassRiffAmp;
+        msg.getFloat(1) => STATIC.oscBassRiffFreq;
+        msg.getInt(2) => STATIC.oscBassRiffPhrase;
+        live.join(live.dec2Pos(msg.getInt(3)),
                   live.dec2Pos(msg.getInt(4)),
-                  live.dec2Pos(msg.getInt(5))) @=> STATIC.oscBassRiff1Array;   
-        STATIC.MAXINT => STATIC.oscBassRiff1Mark;
-        if (msg.numArgs() > 6) {
-          msg.getInt(6) => STATIC.oscBassRiff1Mark;
-        }
+                  live.dec2Pos(msg.getInt(5)),
+                  live.dec2Pos(msg.getInt(6))) @=> STATIC.oscBassRiffArray;   
+        msg.getInt(7) => STATIC.oscBassRiffMark;
       }            
       else {
-        msg.getInt(0) => STATIC.oscBassRiff1Mark;
+        msg.getInt(0) => STATIC.oscBassRiffMark;
       }
     }  
 
@@ -447,10 +393,7 @@ while( true )
                   live.dec2Pos(msg.getInt(3)),
                   live.dec2Pos(msg.getInt(4)),
                   live.dec2Pos(msg.getInt(5))) @=> STATIC.oscDogPackArray;   
-        STATIC.MAXINT => STATIC.oscDogPackMark;
-        if (msg.numArgs() > 6) {
-          msg.getInt(6) => STATIC.oscDogPackMark;
-        }
+        msg.getInt(6) => STATIC.oscDogPackMark;
       }            
       else {
         msg.getInt(0) => STATIC.oscDogPackMark;

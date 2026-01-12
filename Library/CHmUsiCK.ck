@@ -457,95 +457,130 @@ public class Chmusick extends Chugraph {
            
     }
 
-    public void play(SndBuf buffer, int sample[])
-    {
-      buffer => Envelope envelope => outlet;
+    // public void play(SndBuf buffer, int sample[])
+    // {
+    //   buffer => Envelope envelope => outlet;
 
-      while(true)
-      {
-        for(0 => int i; i < sample.cap(); i++)
-        {
-          if (sample[i] == 1)
-          {
-            envelope.keyOn();
-             0 => buffer.pos;
-             Dur(STATIC.TEMPO,STATIC.DIVISION) => now;
-          }
-          else {
-             Dur(STATIC.TEMPO,STATIC.DIVISION) => now;
-          }
-        }
-      }  
-    }
+    //   while(true)
+    //   {
+    //     for(0 => int i; i < sample.cap(); i++)
+    //     {
+    //       if (sample[i] == 1)
+    //       {
+    //         envelope.keyOn();
+    //          0 => buffer.pos;
+    //          Dur(STATIC.TEMPO,STATIC.DIVISION) => now;
+    //       }
+    //       else {
+    //          Dur(STATIC.TEMPO,STATIC.DIVISION) => now;
+    //       }
+    //     }
+    //   }  
+    // }
     
-    public void play(SndBuf buffer, int sample[], float gain)
-    {
-      buffer => Envelope envelope => outlet;
+    // public void play(SndBuf buffer, int sample[], float gain)
+    // {
+    //   buffer => Envelope envelope => outlet;
 
-      while(true)
-      {
-        for(0 => int i; i < sample.cap(); i++)
-        {
-          if (sample[i] == 1)
-          {
-            envelope.keyOn();
-            0 => buffer.pos;
-            gain => buffer.gain;
-            Dur(STATIC.TEMPO,STATIC.DIVISION) => now;
-          }
-          else {
-            Dur(STATIC.TEMPO,STATIC.DIVISION) => now;
-          }
-        }
-      } 
-    }
+    //   while(true)
+    //   {
+    //     for(0 => int i; i < sample.cap(); i++)
+    //     {
+    //       if (sample[i] == 1)
+    //       {
+    //         envelope.keyOn();
+    //         0 => buffer.pos;
+    //         gain => buffer.gain;
+    //         Dur(STATIC.TEMPO,STATIC.DIVISION) => now;
+    //       }
+    //       else {
+    //         Dur(STATIC.TEMPO,STATIC.DIVISION) => now;
+    //       }
+    //     }
+    //   } 
+    // }
     
     public void play(SndBuf buffer, int sample[], float gain, float rate, int stop_number)
     {
         buffer => Envelope envelope => outlet;
 
-        // Allow to play a number of phrases   
-        Math.min(STATIC.MAXINT,stop_number + STATIC.PHRASES) => int stop_phrases;
+        // Setup the initial counter     
+        0 => int countLocl;
 
         // Loop round the sample
         while(true) {
-            for(0 => int i; i < sample.cap(); i++) {
-                if ((sample[i] == 1) && (stop_phrases >= STATIC.PHRASES)) {
-                    envelope.keyOn();
-                    0 => buffer.pos;
-                    gain => buffer.gain;
-                    rate => buffer.rate;
-                    Dur(STATIC.TEMPO,STATIC.DIVISION) => now;
-                }
-                else {
-                    Dur(STATIC.TEMPO,STATIC.DIVISION) => now;
-                }
+            for (0 => int i; i < sample.cap(); i++) {
+                // Play the sample if required and it's less than the stop number then play it
+                if ((sample[i] == 1) && (countLocl < stop_number)) {
+                        envelope.keyOn();
+                        0 => buffer.pos;
+                        gain => buffer.gain;
+                        rate => buffer.rate;
+                }    
+               Dur(STATIC.TEMPO,STATIC.DIVISION) => now;
             }
-      }  
+            countLocl++;
+        }  
     }
     
     
+//    public void play(Osc instr, int pattern[], float gain, int stop_number)
     public void play(Osc instr, int pattern[], float gain, int stop_number)
     {
         instr => outlet;
 
-        // Allow to play a number of phrases   
-        Math.min(STATIC.MAXINT,stop_number + STATIC.PHRASES) => int stop_phrases;
+         // Setup the initial counter     
+        0 => int countLocl;
 
         while(true) {
             for (0 => int i; i < pattern.cap(); i++) {
-                if ((pattern[i] != 0) && (stop_phrases >= STATIC.PHRASES)) {
+                // Only play if the counter is less than the stop number
+                if ((pattern[i] != 0) && (countLocl < stop_number)) {
                     //instr.gain(gain);
                     gain => instr.gain;
                     Std.mtof(pattern[i]) => instr.freq;
-                    Dur(STATIC.TEMPO,STATIC.DIVISION) => now;
                 }
                 else {
                     instr.gain(0);
-                    Dur(STATIC.TEMPO,STATIC.DIVISION) => now;
                 }
+                Dur(STATIC.TEMPO,STATIC.DIVISION) => now;
             }
+ 
+            countLocl++;
+ 
         }
+    }
+
+
+    public void play(StkInstrument osc, int pattern[], float gain, int stop_number)
+    {
+        /*BlowBotl; BandedWG; Wurley; TubeBell; Bowed;
+        Rhodey; PercFlut; BlowHole; HevyMetl; ModalBar;
+        Flute; Mandolin; Saxofony; Moog; Sitar;
+        StifKarp; BeeThree; FMVoices;*/
+        osc => Envelope envelope => outlet;
+
+        // Setup the initial counter     
+        0 => int countLocl;
+
+        while(true) {
+            for (0 => int i; i < pattern.cap(); i++) {
+                // Only play if the counter is less than the stop number
+                if ((pattern[i] != 0) && (countLocl < stop_number)) {
+                    // 20::samp => now;
+                    envelope.keyOn();
+                    1.0 => osc.noteOn;
+                    gain => osc.gain;
+                    Std.mtof(pattern[i]) => osc.freq;
+                }
+                else {
+                    envelope.keyOff();
+                    0.0 => osc.noteOff;
+                }
+                Dur(STATIC.TEMPO,STATIC.DIVISION) => now;
+            }
+             countLocl++;
+         }
     }
     
     public float ramp(float value, float minValue, float maxValue, float rate)

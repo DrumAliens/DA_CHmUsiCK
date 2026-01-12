@@ -12,23 +12,33 @@ playPhrase, playVolume, numPhrase, maskArray, timeArray, delayPhrase, stopNum, f
 # Set up server and client for testing
 client = SimpleUDPClient(Library.sendIp, Library.sendPort)
 
+vocalGain = 0.5
+vocalRatio = 1.05
+
 # ==== Send out 
 if (delayPhrase > 0): 
 
     dispatcher = Dispatcher()
     dispatcher.map("/song/internal/phrase", Library.set_filter)  # Map wildcard address to set_filter function
-    
+
     # Find a free port
     for port in range(Library.replayPort, Library.replayPort + Library.replayPortNum):      
         try:
             server = ThreadingOSCUDPServer(('127.0.0.1', port), dispatcher)
         except:
             pass
-    
+
     for i in range(delayPhrase): 
         server.handle_request()
-    
-if stopNum == 0:
-    client.send_message("/song/vocals/dogpack", [0.5*playVolume, freqRatio, 1, 0, 0, 0, 1])
+
+if (maskArray[0]*maskArray[1]*maskArray[2]*maskArray[3] > 0):
+    posVal = Library.pos2Dec([0,3,6,11,14])
 else:
-    client.send_message("/song/vocals/dogpack", [stopNum])
+    posVal = Library.pos2Dec([0,3,6])
+
+if stopNum == 0:
+    client.send_message("/song/drums/kick", [0.125*playVolume, 1.0, maskArray[3]*posVal, maskArray[2]*posVal, maskArray[1]*posVal, maskArray[0]*posVal, numPhrase])
+else:
+    client.send_message("/song/drums/kick", [stopNum])
+
+

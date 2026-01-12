@@ -12,7 +12,6 @@ playPhrase, playVolume, numPhrase, maskArray, timeArray, delayPhrase, stopNum, f
 # ==== Send out
 client = SimpleUDPClient(Library.sendIp, Library.sendPort)
 
-vocalGain = 0.5
 vocalRatio = 1.05
 
 if (delayPhrase > 0): 
@@ -33,6 +32,6 @@ if (delayPhrase > 0):
 
 posVal1 = Library.pos2Dec([0])
 if stopNum == 0:
-    client.send_message("/song/vocals/chop1", [vocalGain*playVolume, vocalRatio, maskArray[3]*posVal1, maskArray[2]*posVal1, maskArray[1]*posVal1, maskArray[0]*posVal1, numPhrase])
+    client.send_message("/song/vocals/chop1", [0.2*playVolume, vocalRatio, maskArray[3]*posVal1, maskArray[2]*posVal1, maskArray[1]*posVal1, maskArray[0]*posVal1, numPhrase])
 else:
     client.send_message("/song/vocals/chop1", [stopNum])

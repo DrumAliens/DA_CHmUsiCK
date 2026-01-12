@@ -1,4 +1,10 @@
-Chmusick live => Gain gate => dac;
+Chmusick live => HPF dogHPF => LPF dogLPF => Gain gate => dac;
+
+200 => dogHPF.freq;
+0.6 => dogHPF.Q;
+
+6000 => dogLPF.freq;
+0.6 => dogLPF.Q;
 
 // Sort changes to song
 STATIC.oscMaster[3] => STATIC.TEMPO;
