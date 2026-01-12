@@ -11,26 +11,27 @@ This then has made use of the samples and original musical idea from here
 
 https://github.com/dbrown2642/ChucK-live-code-performance
 
+and here https://en.wikipedia.org/wiki/I_Wanna_Be_Your_Dog. Additional samples have been taken from Freesound.org https://freesound.org/ or recorded by myself
+
 ## Objective
-In CHmUsiCK a single livecode.ck file is reloaded (re-sporked in ChucK terminology) after a predefined number of bars. The song has to be develoed in the file and saved for that new set of instructions to be turned into music.
+In the orginal version of CHmUsiCK a single livecode.ck file is reloaded (re-sporked in ChucK terminology) after a predefined number of bars. With the track being developed live with the changes being reloaded and turned into music.
 
 In this version instruments have been split out into individual chuck files this allows the following advantages
-- samples that blend across bars can play properly (ends not overwritten)
+- samples that blend across bars can play properly handled (any decays can play on and not overwritten)
 - instrument changes are only reloaded when a change is triggered
 
-What each instrument plays is controlled by sending out OSC messages to the ChucK code which then decodes this into a musical instructions. The code also sends out OSC synch messages this allows a "player piano" mode to be used. Which allows the sent OSC messages to be scheduled to allow a song without having to be controlled live. This allows you to develop ideas and the song, see the program oscPlayer.py as an example.
+What each instrument plays is controlled by sending out OSC messages to the ChucK code which then decodes this into a set of musical instructions. The code also sends out OSC synch messages this allows a "player piano" mode to be used. Which allows the sent OSC messages to be scheduled to allow a song to be play as a peice instead of having to generate it as a performance. This can also be used to develop your ideas, using program oscPlayer.py.
 
-Importantly, as in CHmuSK any changes made to the song have to be sent saved at any point during the current phrase so that the changes can be instigated at the start of the new phrase. Synching of the music is handled by ChucK.
+Importantly, as in CHmuSK any changes made to the song have to be sent at a point during the current phrase so that the changes can be instigated at the start of the new phrase. Synching of the music is handled by ChucK.
 
-Note: this approach doesn't give you as much control as you can get with the CHmUsiCK or a more traditional livecoding approach. With the elements of the song/code having to be generated before each performance.
+Note: this approach doesn't give you as much control as you would get in a more traditional livecoding approach. With the elements of the song/code having to be generated before each performance.
 
 <h2 align="center"> You are more conducting than livecoding </h2>
 
-# Linux Setup
+# Operating System
+This code has been tested and run on MAC and Ubuntu
 
-The code has been developed on Ubuntu
-
-## Modify Ubuntu 
+## Modify Ubuntu (Optional)
 
 Upgrade Ubuntu to make use of the real time kernel and low latency configuration. Open the terminal (Ctrl + Alt + T) and run:
 ```bash
@@ -64,14 +65,18 @@ Finally, run the following command, which will optimally configure your system f
 ```
 Your system will likely require a restart at this point, but once the new configuration is active, you're good to go.
 
-# Chuck Setup
+# Chuck Installation Setup
 
 This project makes use of ChucK livecoding environment. Get the latest version of the software from here
 ```
 https://chuck.stanford.edu/release/
 ```
 
-get the build instructions from here
+## MAC
+Install as per any other software
+
+## Ubuntu 
+Get the build instructions from here
 
 ```
 https://github.com/ccrma/chuck#readme
@@ -113,44 +118,17 @@ and execute with the following command
     ./myfile.py
 ```
 
-# Running the code
-
-### Running ChucK 
-In a terminal run the following
-
-```bash
-    $ chuck Library.ck
-```
-This then loads all of the different chuck elements to run the code. It will wait at this point for a OSC synch message, this contains song information such as the number of bars that make up the phrase and the tempo of the song.
-
-### Jack Control
-
-**NEED SOMETHING IN HERE**
-
-Install jack
-sudo apt install jackd2 qjackctl pipewire-jack
-
-
-in terminal type to find the list of available devices 
-```
-chuck --probe
-```
-
-should be able to do 
-```
-chuck --device:Jack Library.ck
-```
-
 # OSC Control
 
-There are 3 different modes/approaches you can use to control the cond
+There are 3 different modes/approaches you can use to control the code
 
 - jupyter notebook, see oscSend.ipynb. Setup up a section for either each instrument or changes to be made at each point in the song
 - playpiano mode, see oscPlay.py. This replicates the code that is wrapped 
-- use a collection of OSC python instrument scripts, see the Song directory  
+- use a collection of OSC python instrument scripts, see the section Running the code for live performance   
+
+Warning: I have been concentrating on the last option so if you try and run the one of the first two options they might not work. I plan to rectify this and put a completed track in as an example.
 
 The table below shows the different OSC messages, IP and port numbers used. The three different options reflect the 3 different options for controlling the ChucK code. Note: that chuck program and the python can be run on different computers and in that case the IP's of the elements in bold would have to be changed accordingly. 
-
 
 | IP | Port | Osc Message | From | To |
 | --- | --- | --- | --- | --- |
@@ -168,17 +146,37 @@ The table below shows the different OSC messages, IP and port numbers used. The 
 |127.0.0.1 | 49169  | song/internal/phrase | 00_StartSong.py | Python Instrument Files |\
 |127.0.0.1 | 49170  | song/internal/phrase | 00_StartSong.py | Python Instrument Files |\
 |127.0.0.1 | 49171  | song/internal/phrase | 00_StartSong.py | Python Instrument Files |\
+|127.0.0.1 | 49172  | song/internal/phrase | 00_StartSong.py | Python Instrument Files |\
+|127.0.0.1 | 49173  | song/internal/phrase | 00_StartSong.py | Python Instrument Files |\
 
 Note: the last 8 ports in the table broadcast of the phrase numbers generated by OscTrnsmt.ck. The instrument files use this information to allow it to be delayed before it is played. The instrument file searches for a free port this then means that you can have up to 8 instruments delayed at any one time.
 
-# Song folder
+# Running the code for performing live
 
-This contains a series of python scripts that can be used to replicate the song written in oscPlayer.py allowing you to play live
+Essentially you need at least three terminal windows. There are a number of tools to do this I have been using tmux as this is works across MAC and Linux
 
-## 00_StartSong.py
-This transmits all of the song information bpm, bar length and phrase length to ChucK. This has to be run first
+### Terminal 1 - Running ChucK 
+In a terminal run the following in the project root directory
 
-This also receieves the phrase number information from ChucK (OscTrnsmt.ck) and displays it broadcasts this on various ports
+```bash
+    $ chuck Library.ck
+```
+This then loads all of the different chuck elements to run the code. It will wait at this point for a OSC synch message, this contains song information such as the number of bars that make up the phrase and the tempo of the song.
+
+### Terminal 2 - Start the Song
+You run this from the Song folder 
+
+```bash
+    $ ./00_StartSong.py
+```
+
+This transmits all of the song information bpm, bar length and phrase length to ChucK. This has to be run after the chuck library has been started.
+
+This also receieves the phrase number information from ChucK (OscTrnsmt.ck) displays it and broadcasts this on various ports shown above
+
+### Terminal 3 - Instrument Instructions
+
+These scripts have to be run from the Song Folder and control of what is played. See SongNotes.txt which contains a series of commands which can be copied and pasted into you instrument terminal. Note: if you are using instructions which delay when an instrument is played then this can block you from copying and pasting in the next command ... this is why you might want more terminals if you want to give a smooth performance.
 
 ## 01_SongFade.py
 
@@ -190,7 +188,6 @@ This allows a fade for all of instruments. This use the following input arguemen
 |**Mark**    |m10  |integer |fade instruments starting in 1X and 3X |\
 
 The Mark information is converted into binary in ChucK to allow different instruments to fade. The leading number of the instrument file indicates the bit to enable
-
 
 ## Instrument files
 
@@ -204,7 +201,7 @@ You can use the following command line arguements to control what is played. The
 |**Mark**    |m10  |integer |selects bar 1 and bar 3 parts of the phrase to be played converts decimal to binary with the MSB being bar 1 (15) |\
 |**Timing**  |t10  |integer |similar to Mark allows different timings to be switched on or off each bar, usefull for synths (0) |\
 |**Delay**   |d2   |integer |delays playing this phrase for 2 cycles (0) |\
-|**Stop**    |s2   |integer |stops playing that instrument after 2 cycles (0) |
+|**Stop**    |s2   |integer |stops playing that instrument after 2 cycles (0 indicates there is no stop) |
 |**Volume**  |v0.5 |float   |allows you to change the current volume (1.0) |
 
 To make replicating this live each instrument has been grouped using a leading number
@@ -219,6 +216,8 @@ To make replicating this live each instrument has been grouped using a leading n
 This contains a bunch of functions which are shared across the python scripts
 
 # Future Improvements
-- Automatically shut down 00_StartSong.py if it doesn't receive OSC messages
+- Update OscPlayer.py and oscSend.ipynb so you can play a completed track
+- Automatically shut down 00_StartSong.py if it doesn't receive OSC messages within a certain time - this is more annoying than critical
+- Currently the code is not flexible to run different tracks so you would either have to copy the code and re write parts to create a new project or generate a combined project ... which might be inefficient
 
 

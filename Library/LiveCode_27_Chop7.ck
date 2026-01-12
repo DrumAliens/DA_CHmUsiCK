@@ -1,4 +1,10 @@
-Chmusick live => JCRev rev => Gain gate => dac;
+Chmusick live => JCRev rev => HPF chopHPF => LPF chopLPF => Gain gate => dac;
+
+200 => chopHPF.freq;
+0.6 => chopHPF.Q;
+
+6000 => chopLPF.freq;
+0.6 => chopLPF.Q;
 
 STATIC.oscChop7Gain => gate.gain;
 0.04 => rev.mix;

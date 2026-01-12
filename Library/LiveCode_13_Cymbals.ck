@@ -1,10 +1,13 @@
-Chmusick live => JCRev rev => Gain gate => dac;
+Chmusick live => JCRev rev => HPF cymbalHPF => Gain gate => dac;
+
+50 => cymbalHPF.freq;
+0.4 => cymbalHPF.Q;
 
 // Sort changes to song
 STATIC.oscMaster[3] => STATIC.TEMPO;
 
 STATIC.oscCymbalGain => gate.gain;
-0.01 => rev.mix;
+0.000 => rev.mix;
 
 // DRUMS
 0.5 => float localGain;

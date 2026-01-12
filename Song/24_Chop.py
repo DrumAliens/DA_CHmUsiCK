@@ -12,7 +12,6 @@ playPhrase, playVolume, numPhrase, maskArray, timeArray, delayPhrase, stopNum, f
 # Set up server and client for testing
 client = SimpleUDPClient(Library.sendIp, Library.sendPort)
 
-vocalGain = 0.5*playVolume
 vocalRatio = 1.06
 
 # if we define the number of bars we can then auto fill the OSC message to pack out the information
@@ -35,9 +34,9 @@ if (delayPhrase > 0):
     for i in range(delayPhrase): 
         server.handle_request()
 
-posVal4 = Library.pos2Dec([9])
+posVal4 = Library.pos2Dec([10])
 if stopNum == 0:
-    client.send_message("/song/vocals/chop4", [0.5*vocalGain, vocalRatio*freqRatio, maskArray[3]*posVal4, maskArray[2]*posVal4, maskArray[1]*posVal4, maskArray[0]*posVal4, numPhrase])
+    client.send_message("/song/vocals/chop4", [0.125*playVolume, vocalRatio*freqRatio, maskArray[3]*posVal4, maskArray[2]*posVal4, maskArray[1]*posVal4, maskArray[0]*posVal4, numPhrase])
 else:
     client.send_message("/song/vocals/chop4", [stopNum])
 

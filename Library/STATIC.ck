@@ -42,7 +42,7 @@ public class STATIC
     static int oscMsgChop5Recvr;
     static int oscMsgChop6Recvr;
     static int oscMsgChop7Recvr;
-    static int oscMsgBassRiff1Recvr;
+    static int oscMsgBassRiffRecvr;
     static int oscMsgDogPackRecvr;
     static int oscMsgFadeRecvr;
          
@@ -135,11 +135,12 @@ public class STATIC
     1.0 => static float oscChop6Gain;
     1.0 => static float oscChop7Gain;
 
-    static float oscBassRiff1Amp;
-    static float oscBassRiff1Freq;
-    MAXINT => static int oscBassRiff1Mark;
-    static int oscBassRiff1Array[DIVISION*CYCLES];
-    1.0 => static float oscBassRiff1Gain;
+    static float oscBassRiffAmp;
+    static float oscBassRiffFreq;
+    static int oscBassRiffPhrase;
+    MAXINT => static int oscBassRiffMark;
+    static int oscBassRiffArray[DIVISION*CYCLES];
+    1.0 => static float oscBassRiffGain;
 
     static float oscDogPackAmp;
     static float oscDogPackFreq;

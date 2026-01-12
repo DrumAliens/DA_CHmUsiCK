@@ -25,6 +25,8 @@ def set_filter(address: str, *args: List[Any]) -> None:
         instr06.send_message("/song/internal/phrase",[phraseNum])
         instr07.send_message("/song/internal/phrase",[phraseNum])
         instr08.send_message("/song/internal/phrase",[phraseNum])
+        instr09.send_message("/song/internal/phrase",[phraseNum])
+        instr10.send_message("/song/internal/phrase",[phraseNum])
         return
 
 # =================================
@@ -54,6 +56,8 @@ instr05 = SimpleUDPClient('127.0.0.01', Library.replayPort+4)
 instr06 = SimpleUDPClient('127.0.0.01', Library.replayPort+5)
 instr07 = SimpleUDPClient('127.0.0.01', Library.replayPort+6)
 instr08 = SimpleUDPClient('127.0.0.01', Library.replayPort+7)
+instr09 = SimpleUDPClient('127.0.0.01', Library.replayPort+8)
+instr10 = SimpleUDPClient('127.0.0.01', Library.replayPort+9)
 
 # =================================
 # Listen to OSC port from Chuck

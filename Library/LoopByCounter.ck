@@ -38,10 +38,10 @@ Machine.add(me.dir()+"/LiveCode_25_Chop5.ck") => int fileChop5ID;
 Machine.add(me.dir()+"/LiveCode_27_Chop7.ck") => int fileChop7ID;
 Machine.add(me.dir()+"/LiveCode_30_Synth.ck") => int fileSynthID;
 Machine.add(me.dir()+"/LiveCode_40_Piano.ck") => int filePianoID;
-Machine.add(me.dir()+"/LiveCode_50_BassRiff1.ck") => int fileBassRiff1ID;
+Machine.add(me.dir()+"/LiveCode_50_BassRiff.ck") => int fileBassRiffID;
 Machine.add(me.dir()+"/LiveCode_60_DogPack.ck") => int fileDogPackID;
 
-if (fileKickID*fileSnareID*fileCymbalsID*fileSynthID*filePianoID*fileChop1ID*fileChop3ID*fileChop4ID*fileChop5ID*fileChop7ID*fileBassRiff1ID*fileDogPackID != 0) {
+if (fileKickID*fileSnareID*fileCymbalsID*fileSynthID*filePianoID*fileChop1ID*fileChop3ID*fileChop4ID*fileChop5ID*fileChop7ID*fileBassRiffID*fileDogPackID != 0) {
    spork~beatCounter() @=> counterID;
    while(true) day => now;
 }
@@ -76,8 +76,8 @@ else {
    if (filePianoID == 0) {
       <<< "Check your LiveCode_40_Piano.ck file " >>>;
    }
-   if (fileBassRiff1ID == 0) {
-      <<< "Check your LiveCode_50_BassRiff1.ck file " >>>;
+   if (fileBassRiffID == 0) {
+      <<< "Check your LiveCode_50_BassRiff.ck file " >>>;
    }
    if (fileDogPackID == 0) {
       <<< "Check your LiveCode_60_DogPack.ck file " >>>;
@@ -142,9 +142,9 @@ public static int beatCounter() {
             0 => STATIC.oscMsgPianoRecvr;
          }
 
-         if (STATIC.oscMsgBassRiff1Recvr > 0) { 
-            Machine.replace(fileBassRiff1ID,me.dir()+"/LiveCode_50_BassRiff1.ck");
-            0 => STATIC.oscMsgBassRiff1Recvr;
+         if (STATIC.oscMsgBassRiffRecvr > 0) { 
+            Machine.replace(fileBassRiffID,me.dir()+"/LiveCode_50_BassRiff.ck");
+            0 => STATIC.oscMsgBassRiffRecvr;
          }   
 
          if (STATIC.oscMsgDogPackRecvr > 0) { 
